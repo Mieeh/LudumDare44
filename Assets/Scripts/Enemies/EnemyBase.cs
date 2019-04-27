@@ -19,7 +19,6 @@ public abstract class EnemyBase : MonoBehaviour
     public float chanceOfDropping;
     protected EnemyState enemyState = EnemyState.PATROLLING;
 
-
     protected bool knockedBack = false;
     protected Rigidbody2D rBody;
     protected PlayerCombat playerCombat;
@@ -27,11 +26,19 @@ public abstract class EnemyBase : MonoBehaviour
     protected Transform playerTransform;
     public BoxCollider2D patrollingZone;
 
+    // Start values used when reseting enemy
+    private int startHP;
+    private Vector3 startPosition;
+
     protected void BaseStart(){
         rBody = GetComponent<Rigidbody2D>();
         playerCombat = FindObjectOfType<PlayerCombat>();
         playerMove = FindObjectOfType<PlayerMove>();
         playerTransform = playerMove.transform;
+
+        // Copy down starting values
+        startHP = HP;
+        startPosition = transform.position;
     }
 
     public abstract void TakeDamage(int howMuch, float knockBack);
@@ -76,6 +83,29 @@ public abstract class EnemyBase : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        // Disable, basically remove the enemy 
+        rBody.simulated = false;
+        foreach(var colliders in GetComponents<Collider2D>()){
+            colliders.enabled = false;
+        }
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        // Stop all coroutines lmao
+        StopAllCoroutines();
+    }
+
+    public void ResetMe(){
+        // Reset stats
+        HP = startHP;
+        transform.position = startPosition;
+        enemyState = EnemyState.PATROLLING;
+        knockedBack = false;
+
+        // Enable all components again
+        rBody.simulated = true;
+        foreach(var colliders in GetComponents<Collider2D>()){
+            colliders.enabled = true;
+        }
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 }
