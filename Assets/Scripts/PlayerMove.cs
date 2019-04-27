@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     public bool isSprinting, isMoving, isDodging, isInvincible;
     private float moveSpeed = 2.0f;
     private float sprintSpeed = 3.0f;
-    private float invincibilityTimeInSeconds = 0.7f;
+    private float invincibilityTimeInSeconds = 0.3f;
     private float dodgeTimeInSeconds = 1.0f;
     float verticalInput, horizontalInput, verticalSpeed, horizontalSpeed, timeElapsed;
     private KeyCode dashDirection, potentialDashDirection;
@@ -94,8 +94,6 @@ public class PlayerMove : MonoBehaviour
         if (isDodging) {
             timeElapsed += Time.deltaTime;
             rb.velocity = dodgeDirection * (moveSpeed / Mathf.Pow(timeElapsed + 0.3f, 2) / dodgeDirection.magnitude);
-            //rb.velocity = Vector2.ClampMagnitude(rb.velocity, 17.6f);
-            Debug.Log(rb.velocity.magnitude);
         } else {
             horizontalSpeed = Mathf.Lerp(0, horizontalInput, 0.9f);
             verticalSpeed = Mathf.Lerp(0, verticalInput, 0.9f);
