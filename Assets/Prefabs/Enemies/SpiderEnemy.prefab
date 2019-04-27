@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5532361344490186398}
   - component: {fileID: 5532361344490186389}
   m_Layer: 8
-  m_Name: DummyEnemy
+  m_Name: SpiderEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,14 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d785de795612a784f86c17754fc1f5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 3
-  attack: 1
+  HP: 50
+  attack: 10
   knockStunTime: 1
   itemPool:
   - {fileID: 4620749435037025879, guid: c496e09d9f9741243a12ebdd0709efaf, type: 3}
   chanceOfDropping: 1
   patrollingZone: {fileID: 0}
   patrollingSpeed: 1
+  chaseSpeed: 2
 --- !u!58 &5532361344490186389
 CircleCollider2D:
   m_ObjectHideFlags: 0

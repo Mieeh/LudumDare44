@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyEnemy : EnemyBase
+public class Spider : EnemyBase
 {
     // Inherits:
     // HP: int, attack: int
 
     private Vector2 goalPos;
     public float patrollingSpeed = 1.0f;
+    public float chaseSpeed = 2.0f;
 
     private void Start() {
         BaseStart();
@@ -31,7 +32,7 @@ public class DummyEnemy : EnemyBase
             // Chase the player!
             float distance = (playerTransform.position - transform.position).magnitude;
             if(distance > 0.1f){
-                MoveRigidbodyTowards((Vector2)playerTransform.position, patrollingSpeed);
+                MoveRigidbodyTowards((Vector2)playerTransform.position, chaseSpeed);
             }
         }
     }
@@ -42,7 +43,7 @@ public class DummyEnemy : EnemyBase
         // Knockback away from the player
         StopCoroutine("GetKnockedBack");
         StartCoroutine(GetKnockedBack(knockBack));
-
+        
         // Did we die?
         if(HP <= 0)
             Die();

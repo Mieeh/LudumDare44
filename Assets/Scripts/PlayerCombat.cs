@@ -13,7 +13,9 @@ public class PlayerCombat : MonoBehaviour
     };
 
     [Header("Player Stats")]
+    [System.NonSerialized]
     public int HP = 100;
+    [System.NonSerialized]
     public int attack = 10;
 
     [Header("Components & Other")]
@@ -77,7 +79,11 @@ public class PlayerCombat : MonoBehaviour
 
         print("Player Attacked!");
 
-        StartCoroutine(AttackedCoroutine(enemy));
+        StartCoroutine(AttackedCoroutine(enemy.transform.position));
+    }
+
+    public void GetAttacked(Vector2 position, int howMuch){
+        int damage = ConvertToPlayerDamage(howMuch);
     }
 
     public int GetPlayerAttack(){
@@ -104,7 +110,14 @@ public class PlayerCombat : MonoBehaviour
         return 0;
     }
 
-    private IEnumerator AttackedCoroutine(EnemyBase enemy){
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "Projectile"){
+            Destroy(other.gameObject);
+            GetAttacked()
+        }
+    }
+
+    private IEnumerator AttackedCoroutine(Vector2 position){
         isAttacking = true;
         playerMove.enabled = false;
         rb.velocity = Vector2.zero;
@@ -113,7 +126,7 @@ public class PlayerCombat : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
         // Apply the knockback force
-        Vector2 dir = enemy.transform.position - transform.position;
+        Vector2 dir = (Vector3)position - transform.position;
         dir*=-1;
         dir.Normalize();
         rb.AddForce(dir*200);
@@ -124,6 +137,9 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = false;
 
         yield return new WaitForSeconds(stunTimer*0.7f);
+
+        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<Collider2D>().enabled = true;
     }
 
     private IEnumerator AttackCoroutine(){

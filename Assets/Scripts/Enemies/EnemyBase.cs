@@ -67,11 +67,13 @@ public abstract class EnemyBase : MonoBehaviour
     protected void Die(){
 
         // Spawn item?
-        float rand = Random.Range(0.0f, 1.0f);
-        if(rand >= 1.0f-chanceOfDropping){
-            // Yes, we drop some random item from our pool
-            int randIndex = Random.Range(0, itemPool.Count);
-            GameObject spawnedItem = Instantiate(itemPool[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+        if(itemPool.Count > 0) {
+            float rand = Random.Range(0.0f, 1.0f);
+            if(rand >= 1.0f-chanceOfDropping){
+                // Yes, we drop some random item from our pool
+                int randIndex = Random.Range(0, itemPool.Count);
+                GameObject spawnedItem = Instantiate(itemPool[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+            }
         }
 
         Destroy(gameObject);
