@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float moveSpeed = 1.0f;
-    float verticalInput, horizontalInput;
+    float verticalInput, horizontalInput, verticalSpeed, horizontalSpeed;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +24,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Move(){
-        rb.velocity = new Vector2(horizontalInput, verticalInput) * moveSpeed;
+        verticalSpeed = Mathf.Lerp(0, verticalInput, 0.9f);
+        horizontalSpeed = Mathf.Lerp(0, horizontalInput, 0.9f);
+        rb.velocity = new Vector2(horizontalSpeed, verticalSpeed) * moveSpeed;
     }
 }
