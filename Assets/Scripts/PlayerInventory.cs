@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour
 
     [System.NonSerialized]
     public List<Item> itemList = new List<Item>();
+
     public Item currentWeapon;
     public Item currentArmor;
 

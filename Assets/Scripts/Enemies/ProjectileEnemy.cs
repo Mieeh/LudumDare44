@@ -56,7 +56,7 @@ public class ProjectileEnemy : EnemyBase
     private IEnumerator ShootAtPlayer(){
         while(true){
             yield return new WaitForSeconds(fireRateInSeconds);
-            
+
             // Shoot projectile!
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity) as GameObject;
             
