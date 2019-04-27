@@ -10,11 +10,14 @@ public class Item : MonoBehaviour
         JUNK
     }
 
+    public string itemName;
+    [TextArea]
+    public string flavourText;
     public ItemType itemType;
     public int value = 0;
     public int damage = 0;
     public int defense = 0;
-    
+
     private SpriteRenderer spre;
 
     private void Awake() {

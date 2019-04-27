@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    static int ITEM_MAX_COUNT = 16;
+    public static int ITEM_MAX_COUNT = 16;
 
     [System.NonSerialized]
-    public int itemCount = 0;
-    public Item[] itemList = new Item[ITEM_MAX_COUNT];
+    public List<Item> itemList = new List<Item>();
 
     public Item currentWeapon;
     public Item currentArmor;
@@ -25,10 +24,9 @@ public class PlayerInventory : MonoBehaviour
     public void AddItem(Item itemToAdd){
 
         // @ Maybe auto equip if we dont have any weapon or armor equiped
-        if(itemCount < ITEM_MAX_COUNT){
+        if(itemList.Count < ITEM_MAX_COUNT){
             itemToAdd.gameObject.SetActive(false);
-            itemList[itemCount] = itemToAdd;
-            itemCount++;
+            itemList.Add(itemToAdd);
         }
         else{
             print("Max capacity reached!");
@@ -42,15 +40,27 @@ public class PlayerInventory : MonoBehaviour
         }
 
         if(itemToEquip.itemType == Item.ItemType.WEAPON){
+            if(currentWeapon != null){
+                AddItem(currentWeapon);
+            }
             currentWeapon = itemToEquip;
         }
         else{
+            if(currentArmor != null){
+                AddItem(currentArmor);
+            }
             currentArmor = itemToEquip;
         }
     }
 
+    public void RemoveItem(Item itemToRemove){
+        if(itemList.Contains(itemToRemove)){
+            itemList.Remove(itemToRemove);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.tag == "Item"){
+        if(other.GetComponent<Item>() != null){
             AddItem(other.GetComponent<Item>());
         }
     }

@@ -19,6 +19,7 @@ public class PlayerCombat : MonoBehaviour
     [Header("Components & Other")]
     public BoxCollider2D attackCollider;
     private Rigidbody2D rb;
+    private PlayerMove playerMove;
     private List<Vector3> attackColliderPositions = new List<Vector3>();
 
     private AttackDirection attackDirection;
@@ -27,6 +28,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        playerMove = GetComponent<PlayerMove>();
 
         attackColliderPositions.Add(new Vector3(0, 1));
         attackColliderPositions.Add(new Vector3(1, 0));
@@ -57,7 +59,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack(){
         // If we're already attacking, STOP and return 
-        if(isAttacking)
+        if(isAttacking || playerMove.isDodging)
             return;
 
         StartCoroutine("AttackCoroutine");
@@ -71,18 +73,29 @@ public class PlayerCombat : MonoBehaviour
         attackCollider.transform.localPosition = attackColliderPositions[(int)attackDirection];
 
         // Disable movement
-        GetComponent<PlayerMove>().enabled = false;
+        playerMove.enabled = false;
         rb.velocity = Vector2.zero;
         
         yield return new WaitForSeconds(attackLengthInSeconds);
         
         // Enable movement
-        GetComponent<PlayerMove>().enabled = true;
+        playerMove.enabled = true;
 
         // Disable the collider
         attackCollider.enabled = false;
         attackCollider.transform.localPosition = Vector2.zero;
         isAttacking = false;
+    }
+
+    public int GetPlayerAttack(){
+
+
+
+        return -1;
+    }
+
+    public int ConvertToPlayerDamage(int attack){
+        return attack;
     }
 
 }

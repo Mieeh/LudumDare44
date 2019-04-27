@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2798918312073858525}
   - component: {fileID: 4620749435037025879}
   m_Layer: 0
-  m_Name: Sword
-  m_TagString: Item
+  m_Name: WoodenSword
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a88f02f36eb04ebd2bfb60d8338c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: Wooden Sword
+  flavourText: 'We shutting the motherfucking shit down now '
   itemType: 0
   value: 0
   damage: 0
