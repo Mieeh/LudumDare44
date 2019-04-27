@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3683706524603877406}
   - component: {fileID: 8098499951149763027}
   m_Layer: 0
-  m_Name: tileset_35
+  m_Name: WallR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 1.6, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -100,7 +100,7 @@ PolygonCollider2D:
     oldSize: {x: 1.6, y: 1.6}
     newSize: {x: 1.6, y: 1.6}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
