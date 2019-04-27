@@ -77,13 +77,17 @@ public class PlayerCombat : MonoBehaviour
             print("DIEDIEDIEDIEDIEDIE");
         }
 
-        print("Player Attacked!");
-
         StartCoroutine(AttackedCoroutine(enemy.transform.position));
     }
 
     public void GetAttacked(Vector2 position, int howMuch){
         int damage = ConvertToPlayerDamage(howMuch);
+        HP-=damage;
+        if(HP <= 0){
+            print("DIEDIEDIEDIEDIE");
+        }
+
+        StartCoroutine(AttackedCoroutine(position));
     }
 
     public int GetPlayerAttack(){
@@ -112,8 +116,8 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Projectile"){
+            GetAttacked(other.transform.position, other.GetComponent<Projectile>().damage);
             Destroy(other.gameObject);
-            GetAttacked()
         }
     }
 
@@ -123,7 +127,7 @@ public class PlayerCombat : MonoBehaviour
         rb.velocity = Vector2.zero;
         
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
-        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Collider2D>().isTrigger = true;
 
         // Apply the knockback force
         Vector2 dir = (Vector3)position - transform.position;
@@ -139,7 +143,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(stunTimer*0.7f);
 
         GetComponent<SpriteRenderer>().color = Color.white;
-        GetComponent<Collider2D>().enabled = true;
+        GetComponent<Collider2D>().isTrigger = false;
     }
 
     private IEnumerator AttackCoroutine(){

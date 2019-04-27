@@ -65,6 +65,9 @@ public class ProjectileEnemy : EnemyBase
             dir.Normalize();
             projectile.GetComponent<Rigidbody2D>().velocity = dir*projectileSpeed;
 
+            // Make sure the projectile deals the correct amount of damage!
+            projectile.GetComponent<Projectile>().damage = attack; 
+
             // Make sure the projectile is destroyed after some amount of time!
             Destroy(projectile, 6);
         }
