@@ -93,8 +93,7 @@ public class PlayerMove : MonoBehaviour
     void Move(){
         if (isDodging) {
             timeElapsed += Time.deltaTime;
-            rb.velocity = dodgeDirection * (moveSpeed / Mathf.Pow(timeElapsed + 0.5f, 2) / dodgeDirection.magnitude);
-            //Debug.Log(rb.velocity.magnitude);
+            rb.velocity = dodgeDirection * (moveSpeed / Mathf.Pow(timeElapsed + 0.3f, 2) / dodgeDirection.magnitude);
         } else {
             horizontalSpeed = Mathf.Lerp(0, horizontalInput, 0.9f);
             verticalSpeed = Mathf.Lerp(0, verticalInput, 0.9f);
