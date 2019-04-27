@@ -13,7 +13,6 @@ public class Pause : MonoBehaviour
             is_paused = !is_paused;
             if(is_paused){
                 pause_object.SetActive(true);
-                Time.timeScale = 0.0f;
                 x.grain.enabled = true;
             }
             else{
@@ -22,5 +21,8 @@ public class Pause : MonoBehaviour
                 x.grain.enabled = false;
             }
         }
+
+        if(is_paused)
+            Time.timeScale = 0.0f;
     }
 }

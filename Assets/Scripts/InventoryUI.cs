@@ -36,6 +36,11 @@ public class InventoryUI : MonoBehaviour
                 CloseInventory();
         }
 
+        if(inventoryGameObject.activeInHierarchy){
+            // Freeze time!
+            Time.timeScale = 0.0f;
+        }
+
         if(inventoryGameObject.activeInHierarchy && playerInventory.itemList.Count > 0){
             // Navigating the inventory
             if(Input.GetKeyDown(KeyCode.D)){
@@ -74,7 +79,6 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void OpenInventory() {
-        Time.timeScale = 0;
         inventoryGameObject.SetActive(true);
 
         UpdateInventorySlots();
