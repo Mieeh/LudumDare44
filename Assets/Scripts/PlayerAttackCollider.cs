@@ -13,7 +13,7 @@ public class PlayerAttackCollider : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         // @ Knockback factor is based on what???
         if(other.GetComponent<EnemyBase>() != null && !other.isTrigger){
-            other.GetComponent<EnemyBase>().TakeDamage(playerCombat.attack, 400f);
+            other.GetComponent<EnemyBase>().TakeDamage(playerCombat.GetPlayerAttack(), 400f);
         }
     }
 }

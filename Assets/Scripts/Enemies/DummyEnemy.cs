@@ -9,7 +9,7 @@ public class DummyEnemy : EnemyBase
 
     private Vector2 goalPos;
     public float patrollingSpeed = 1.0f;
-    
+
     private void Start() {
         BaseStart();
 
@@ -60,6 +60,13 @@ public class DummyEnemy : EnemyBase
         // Stop chasing the player?
         if(other.GetComponent<PlayerCombat>() != null){
             enemyState = EnemyState.PATROLLING;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.GetComponent<PlayerMove>() != null)
+        {
+            other.gameObject.GetComponent<PlayerCombat>().GetAttacked(this);
         }
     }
 

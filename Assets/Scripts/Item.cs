@@ -15,7 +15,10 @@ public class Item : MonoBehaviour
     public string flavourText;
     public ItemType itemType;
     public int value = 0;
+    [Header("Weapon")]
     public int damage = 0;
+    public int knockBack = 0;
+    [Header("Armor")]
     public int defense = 0;
 
     private SpriteRenderer spre;

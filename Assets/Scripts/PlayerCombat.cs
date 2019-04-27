@@ -13,14 +13,16 @@ public class PlayerCombat : MonoBehaviour
     };
 
     [Header("Player Stats")]
-    public int HP;
-    public int attack;
+    public int HP = 100;
+    public int attack = 10;
 
     [Header("Components & Other")]
     public BoxCollider2D attackCollider;
     private Rigidbody2D rb;
     private PlayerMove playerMove;
+    private PlayerInventory playerInventory;
     private List<Vector3> attackColliderPositions = new List<Vector3>();
+    public float stunTimer = 1.0f;
 
     private AttackDirection attackDirection;
     private bool isAttacking = false;
@@ -29,6 +31,7 @@ public class PlayerCombat : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerMove = GetComponent<PlayerMove>();
+        playerInventory = GetComponent<PlayerInventory>();
 
         attackColliderPositions.Add(new Vector3(0, 1));
         attackColliderPositions.Add(new Vector3(1, 0));
@@ -65,6 +68,64 @@ public class PlayerCombat : MonoBehaviour
         StartCoroutine("AttackCoroutine");
     }
 
+    public void GetAttacked(EnemyBase enemy){
+        int damage = ConvertToPlayerDamage(enemy.attack);
+        HP-=damage;
+        if(HP <= 0){
+            print("DIEDIEDIEDIEDIEDIE");
+        }
+
+        print("Player Attacked!");
+
+        StartCoroutine(AttackedCoroutine(enemy));
+    }
+
+    public int GetPlayerAttack(){
+        int _attack = attack;
+        if(playerInventory.currentWeapon != null)
+            _attack += playerInventory.currentWeapon.damage;
+
+        return _attack;
+    }
+
+    public int ConvertToPlayerDamage(int attack){
+        if(playerInventory.currentArmor != null){
+            return attack * (playerInventory.currentArmor.defense/100);
+        }
+        return attack;
+    }
+
+    public int GetPlayerKnockBack(){
+        
+        if(playerInventory.currentWeapon != null){
+            return playerInventory.currentWeapon.knockBack;
+        }
+
+        return 0;
+    }
+
+    private IEnumerator AttackedCoroutine(EnemyBase enemy){
+        isAttacking = true;
+        playerMove.enabled = false;
+        rb.velocity = Vector2.zero;
+        
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+        GetComponent<Collider2D>().enabled = false;
+
+        // Apply the knockback force
+        Vector2 dir = enemy.transform.position - transform.position;
+        dir*=-1;
+        dir.Normalize();
+        rb.AddForce(dir*200);
+
+        yield return new WaitForSeconds(stunTimer*0.3f);
+
+        playerMove.enabled = true;
+        isAttacking = false;
+
+        yield return new WaitForSeconds(stunTimer*0.7f);
+    }
+
     private IEnumerator AttackCoroutine(){
         isAttacking = true;
         // Enable the collider
@@ -85,17 +146,6 @@ public class PlayerCombat : MonoBehaviour
         attackCollider.enabled = false;
         attackCollider.transform.localPosition = Vector2.zero;
         isAttacking = false;
-    }
-
-    public int GetPlayerAttack(){
-
-
-
-        return -1;
-    }
-
-    public int ConvertToPlayerDamage(int attack){
-        return attack;
     }
 
 }
