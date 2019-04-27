@@ -65,7 +65,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Move(){
-        Debug.Log(isSprinting);
+        //Debug.Log(isSprinting);
         verticalSpeed = Mathf.Lerp(0, verticalInput, 0.9f);
         horizontalSpeed = Mathf.Lerp(0, horizontalInput, 0.9f);
 
