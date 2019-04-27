@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CursorMove : MonoBehaviour
 {
+    public static int MAX_ITEMS = 16;
     public List<GameObject> itemSlots = new List<GameObject>();
     private int cursorPosition = 0;
     private ArrayList keysToCheck;
@@ -34,9 +35,9 @@ public class CursorMove : MonoBehaviour
         switch (direction) {
         case KeyCode.W:
             if (cursorPosition == 0) {
-                cursorPosition = 14;
+                cursorPosition = MAX_ITEMS - 2;
             } else if (cursorPosition == 1){
-                cursorPosition = 15;
+                cursorPosition = MAX_ITEMS - 1;
             } else {
                 cursorPosition -= 2;
             }
@@ -49,9 +50,9 @@ public class CursorMove : MonoBehaviour
             }
             break;
         case KeyCode.S:
-            if (cursorPosition == 14) {
+            if (cursorPosition == MAX_ITEMS - 2) {
                 cursorPosition = 0;
-            } else if (cursorPosition == 15){
+            } else if (cursorPosition == MAX_ITEMS - 1) {
                 cursorPosition = 1;
             } else {
                 cursorPosition += 2;
