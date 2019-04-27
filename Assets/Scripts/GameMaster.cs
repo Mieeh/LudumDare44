@@ -8,5 +8,4 @@ Controller of all things related to the game, alot of code will go here for conv
 */
 public class GameMaster : MonoBehaviour
 {
-    
 }
