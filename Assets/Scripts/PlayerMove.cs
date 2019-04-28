@@ -53,16 +53,17 @@ public class PlayerMove : MonoBehaviour
         }
         isMoving = false;
 
+        /* 
         if (Input.GetKeyDown(KeyCode.K) && !isDodging) {
             if (horizontalInput != 0 || verticalInput != 0) {
                 dodgeDirection.x = Mathf.Lerp(0, horizontalInput, 0.9f);
                 dodgeDirection.y = Mathf.Lerp(0, verticalInput, 0.9f);
                 timeElapsed = 0.0f;
-                GetComponent<Collider2D>().enabled = false;
                 StartCoroutine("DodgeTimer");
                 StartCoroutine("InvincibilityTimer");
             }
         }
+        */
     }
 
     private void FixedUpdate() {
@@ -78,17 +79,18 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    /* 
     IEnumerator InvincibilityTimer() {
         isInvincible = true;
         yield return new WaitForSeconds(invincibilityTimeInSeconds);
         isInvincible = false;
-        GetComponent<Collider2D>().enabled = true;
     }
     IEnumerator DodgeTimer() {
         isDodging = true;
         yield return new WaitForSeconds(dodgeTimeInSeconds);
         isDodging = false;
     }
+    */
 
     void Move(){
         if (isDodging) {

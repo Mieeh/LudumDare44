@@ -10,10 +10,13 @@ public class LootCrate : MonoBehaviour
     public GameObject rubbleParticles;
 
     public void GetDestroyed(){
-        // Get destroyed
         // Spawn item + rubble + particles and then destroy this gameobject
-        Instantiate(itemInside.gameObject, transform.position, Quaternion.identity);
-        Instantiate(rubblePrefab, transform.position, Quaternion.identity);
+        GameObject item = Instantiate(itemInside.gameObject, transform.position, Quaternion.identity) as GameObject;
+        item.transform.SetParent(transform.parent);
+
+        GameObject rubble = Instantiate(rubblePrefab, transform.position, Quaternion.identity) as GameObject;
+        rubble.transform.SetParent(transform.parent);
+
         GameObject _particles = Instantiate(rubbleParticles, transform.position, Quaternion.identity) as GameObject;
         Destroy(_particles, 3.0f); // Some amount of time
 

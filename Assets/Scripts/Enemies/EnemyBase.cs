@@ -80,6 +80,8 @@ public abstract class EnemyBase : MonoBehaviour
                 // Yes, we drop some random item from our pool
                 int randIndex = Random.Range(0, itemPool.Count);
                 GameObject spawnedItem = Instantiate(itemPool[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+                // Place under dungeon
+                spawnedItem.transform.SetParent(FindObjectOfType<GameMaster>().dungeonGameObject.transform);
             }
         }
 

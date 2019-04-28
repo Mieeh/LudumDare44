@@ -20,6 +20,8 @@ public class InventoryUI : MonoBehaviour
     public Image playerWeaponImage;
     public TMP_Text playerArmorName;
     public Image playerArmorImage;
+    public TMP_Text playerWeaponDamageText, playerWeaponValueText;
+    public TMP_Text playerArmorStatText, playerArmorValueText;
 
     int desiredIndex = 0;
 
@@ -86,24 +88,41 @@ public class InventoryUI : MonoBehaviour
     }
 
     private void UpdatePlayerWindow(){
+        // Weapon
         if(playerInventory.currentWeapon != null){
-            playerWeaponName.text = playerInventory.currentWeapon.itemName;
+            playerWeaponName.text = "Weapon: " + playerInventory.currentWeapon.itemName;
             playerWeaponImage.sprite = playerInventory.currentWeapon.GetComponent<SpriteRenderer>().sprite;
             playerWeaponImage.color = Color.white;
+
+            // Stat texts
+            playerWeaponDamageText.text = playerInventory.currentWeapon.damage.ToString();
+            playerWeaponValueText.text = playerInventory.currentWeapon.value.ToString();
         }
         else{
             playerWeaponName.text = "No Weapon!";
             playerWeaponImage.color = Color.clear;
+
+            playerWeaponDamageText.text = "";
+            playerWeaponValueText.text = "";
         }
 
+        // Armor
         if(playerInventory.currentArmor != null){
-            playerArmorName.text = playerInventory.currentArmor.itemName;
+            playerArmorName.text = "Armor " + playerInventory.currentArmor.itemName;
+            // Image
             playerArmorImage.sprite = playerInventory.currentArmor.GetComponent<SpriteRenderer>().sprite;
             playerArmorImage.color = Color.white;
+
+            // Stat texts
+            playerArmorStatText.text = playerInventory.currentArmor.defense.ToString();
+            playerArmorValueText.text = playerInventory.currentArmor.value.ToString();
         }
         else{
             playerArmorName.text = "No Armor!";
             playerArmorImage.color = Color.clear;
+
+            playerArmorStatText.text = "";
+            playerArmorValueText.text = "";
         }
     }
 
