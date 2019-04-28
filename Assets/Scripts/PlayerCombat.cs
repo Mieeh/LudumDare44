@@ -13,7 +13,9 @@ public class PlayerCombat : MonoBehaviour
     };
 
     [Header("Player Stats")]
+    [System.NonSerialized]
     public int HP = 100;
+    [System.NonSerialized]
     public int attack = 10;
 
     [Header("Components & Other")]
