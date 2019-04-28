@@ -27,6 +27,15 @@ public class ProjectileEnemy : EnemyBase
                 goalPos = GetRandomPointInsideZone();
             }
         }
+
+        // Animation directionality
+        Vector2 velocityVector = rBody.velocity.normalized;
+        animator.SetFloat("x", velocityVector.x);
+        animator.SetFloat("y", velocityVector.y);
+
+        Vector2 playerVector = (playerTransform.position - transform.position).normalized;
+        animator.SetFloat("x_player", playerVector.x);
+        animator.SetFloat("y_player", playerVector.y);
     }
 
     public override void TakeDamage(int howMuch, float knockBack){
@@ -43,6 +52,7 @@ public class ProjectileEnemy : EnemyBase
         if(other.GetComponent<PlayerCombat>() != null){
             enemyState = EnemyState.CHASING;
             StartCoroutine("ShootAtPlayer");
+            animator.SetTrigger("attack_trigger");
         }
     }
 
@@ -50,6 +60,8 @@ public class ProjectileEnemy : EnemyBase
         if(other.GetComponent<PlayerCombat>() != null) {
             enemyState = EnemyState.PATROLLING;
             StopCoroutine("ShootAtPlayer");
+            // Message animator
+            animator.SetTrigger("patrol_trigger");
         }
     }
 

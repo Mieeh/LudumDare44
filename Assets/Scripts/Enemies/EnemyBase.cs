@@ -25,6 +25,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected PlayerMove playerMove;
     protected Transform playerTransform;
     public BoxCollider2D patrollingZone;
+    protected Animator animator;
 
     // Start values used when reseting enemy
     private int startHP;
@@ -35,6 +36,7 @@ public abstract class EnemyBase : MonoBehaviour
         playerCombat = FindObjectOfType<PlayerCombat>();
         playerMove = FindObjectOfType<PlayerMove>();
         playerTransform = playerMove.transform;
+        animator = GetComponent<Animator>();
 
         // Copy down starting values
         startHP = HP;
@@ -42,6 +44,8 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     public abstract void TakeDamage(int howMuch, float knockBack);
+
+    public virtual void DungeonReset() { }
 
     // Returns a random point that's inside the patrolling zone collider bounds
     protected Vector2 GetRandomPointInsideZone(){
@@ -69,6 +73,7 @@ public abstract class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(knockStunTime);
 
         knockedBack = false;
+
     }
 
     protected void Die(){
@@ -109,5 +114,8 @@ public abstract class EnemyBase : MonoBehaviour
             colliders.enabled = true;
         }
         GetComponent<SpriteRenderer>().enabled = true;
+
+        // Inherited thing gets to know we got reset yo
+        DungeonReset();
     }
 }

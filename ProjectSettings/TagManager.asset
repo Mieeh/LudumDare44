@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - Entrance
   - LootCrate
+  - OgreAttackCollider
   layers:
   - Default
   - TransparentFX
