@@ -63,6 +63,10 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void Die() {
+        
+    }
+
     private void Attack(){
         // If we're already attacking, STOP and return 
         if(isAttacking || playerMove.isDodging || attackInvincibility)
