@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3914940014336140540}
   - component: {fileID: 8307342420600272815}
   m_Layer: 0
-  m_Name: tileset_38
+  m_Name: WallU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

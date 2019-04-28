@@ -26,12 +26,6 @@ public class Shop : MonoBehaviour
     }
 
     private void Update() {
-        #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.V)){
-            StartShop();
-        }
-        #endif
-
         if(shopHolderObject.activeInHierarchy && playerInventory.itemList.Count != 0) {
             // Navigating the inventory
             if(Input.GetKeyDown(KeyCode.W)){
@@ -73,6 +67,10 @@ public class Shop : MonoBehaviour
         UpdateCurrentItem();
     }
 
+    public void CloseShop(){
+        shopHolderObject.SetActive(false);
+    }
+
     public void SellCurrentItem(){
         if(desiredIndex == -1){
             return;
@@ -87,6 +85,7 @@ public class Shop : MonoBehaviour
         playerInventory.itemList.Remove(itemToSell);
         Destroy(itemToSell.gameObject);
 
+        desiredIndex = 0;
 
         // Update UI
         UpdateCurrentItem();

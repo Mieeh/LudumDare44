@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Update(){
         if(transform.position != target.position) {
-            transform.position = Vector3.Lerp(transform.position, target.position, follow_speed * Time.deltaTime);
+            transform.position = target.position;
             transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         }
     }

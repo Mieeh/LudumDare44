@@ -117,6 +117,10 @@ public class PlayerCombat : MonoBehaviour
             GetAttacked(other.transform.position, other.GetComponent<Projectile>().damage);
             Destroy(other.gameObject);
         }
+        if(other.tag == "Entrance"){
+            // Goto SHOP!
+            FindObjectOfType<GameMaster>().GotoShop();
+        }
     }
 
     private IEnumerator AttackedCoroutine(Vector2 position){
