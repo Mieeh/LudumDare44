@@ -89,9 +89,9 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public int GetPlayerAttack(){
-        int _attack = attack;
+        int _attack = attack; // Base attack
         if(playerInventory.currentWeapon != null)
-            _attack += playerInventory.currentWeapon.damage;
+            _attack = playerInventory.currentWeapon.damage;
 
         return _attack;
     }
@@ -120,6 +120,9 @@ public class PlayerCombat : MonoBehaviour
         if(other.tag == "Entrance"){
             // Goto SHOP!
             FindObjectOfType<GameMaster>().GotoShop();
+        }
+        if(other.tag == "OgreAttackCollider"){
+            GetAttacked(other.GetComponentInParent<EnemyBase>());
         }
     }
 

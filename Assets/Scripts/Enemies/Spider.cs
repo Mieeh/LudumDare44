@@ -10,6 +10,7 @@ public class Spider : EnemyBase
     private Vector2 goalPos;
     public float patrollingSpeed = 1.0f;
     public float chaseSpeed = 2.0f;
+    public float chaseRange = 4.0f;
 
     private void Start() {
         BaseStart();
@@ -18,6 +19,15 @@ public class Spider : EnemyBase
     }
 
     private void Update() {
+
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        if(distanceToPlayer < chaseRange){
+            enemyState = EnemyState.CHASING;
+        }
+        else{
+            enemyState = EnemyState.PATROLLING;
+        }
+
         if(enemyState == EnemyState.PATROLLING && !knockedBack){
             // Move towards goalPos
             float distance = ((Vector2)transform.position - goalPos).magnitude; 
@@ -35,6 +45,11 @@ public class Spider : EnemyBase
                 MoveRigidbodyTowards((Vector2)playerTransform.position, chaseSpeed);
             }
         }
+
+        // Animation directionality
+        Vector2 velocityVector = rBody.velocity.normalized;
+        animator.SetFloat("walk_x", velocityVector.x);
+        animator.SetFloat("walk_y", velocityVector.y);
     }
 
     public override void TakeDamage(int howMuch, float knockBack){
@@ -49,25 +64,11 @@ public class Spider : EnemyBase
             Die();
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        // Is the player within our sight? 
-        // If he is, start chasing him!
-        if(other.GetComponent<PlayerCombat>() != null){
-            enemyState = EnemyState.CHASING;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        // Stop chasing the player?
-        if(other.GetComponent<PlayerCombat>() != null){
-            enemyState = EnemyState.PATROLLING;
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.GetComponent<PlayerMove>() != null)
         {
             other.gameObject.GetComponent<PlayerCombat>().GetAttacked(this);
+            animator.SetTrigger("attack_trigger");
         }
     }
 

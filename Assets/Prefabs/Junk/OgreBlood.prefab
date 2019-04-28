@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2798918312073858525}
   - component: {fileID: 4620749435037025879}
   m_Layer: 0
-  m_Name: RedSword
+  m_Name: OgreBlood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300028, guid: 8a5e3e04b1b6dde4088bfb8508e184fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: a5d0a7324c864e643ae07c1652b3cc3f, type: 3}
+  m_Color: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.6, y: 1.6}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -119,10 +119,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a88f02f36eb04ebd2bfb60d8338c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Red Sword
-  flavourText: Red sword yo
-  itemType: 0
-  value: 30
-  damage: 10
+  itemName: Ogre Blood
+  flavourText: I didn't expect ogres to even have this much blood...
+  itemType: 2
+  value: 25
+  damage: 0
   knockBack: 0
   defense: 0

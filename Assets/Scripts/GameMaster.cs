@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour
     public GameObject dungeonGameObject;
     public GameObject shopGameObject;
     private GameObject UIScriptsGameObject;
+    public GameObject playerUIGameObject;
 
     private Shop shopScript;
 
@@ -29,15 +30,6 @@ public class GameMaster : MonoBehaviour
         GotoDungeon();
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Alpha1)){
-            GotoShop();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2)){
-            GotoDungeon();
-        }
-    }
-
     public void GotoShop(){
         StopAllCoroutines();
         StartCoroutine("GotoShopCoroutine");
@@ -50,13 +42,14 @@ public class GameMaster : MonoBehaviour
 
     private IEnumerator GotoShopCoroutine(){
 
-        const float darkenSpeed = 1.5f;
-        const float lightenSpeed = 1.5f;
-        const float exitSpeed = 2.0f;
+        const float darkenSpeed = 0.7f;
+        const float lightenSpeed = 0.7f;
 
         // Disable the players stuff
         playerGameObject.GetComponent<PlayerMove>().enabled = false;
         playerGameObject.GetComponent<PlayerCombat>().enabled = false;
+        UIScriptsGameObject.GetComponent<InventoryUI>().enabled = false;
+        playerUIGameObject.SetActive(false);
 
         // Darken the screen
         while(fadePanel.color != Color.black){
@@ -72,9 +65,12 @@ public class GameMaster : MonoBehaviour
         // Enable shop
         shopGameObject.SetActive(true);
 
+        // Disable camera follow
+        Camera.main.GetComponent<CameraFollow>().enabled = false;
+
         // Positon the camera and player
         playerGameObject.transform.position = new Vector3(0,-2,0);
-        Camera.main.transform.position = new Vector3(0,0,-10);
+        Camera.main.transform.position = new Vector3(0,1,-10);
 
         // Now show the player again
         playerGameObject.SetActive(true);
@@ -90,11 +86,11 @@ public class GameMaster : MonoBehaviour
     }
 
     private IEnumerator GotoDungeonCoroutine(){
-        const float darkenSpeed = 1.5f;
-        const float lightenSpeed = 1.5f;
+        const float darkenSpeed = 0.7f;
+        const float lightenSpeed = 0.8f;
 
         /*
-        Player has PlayerMove & PlayerCombat disabled
+        Player has PlayerMove & PlayerCombat disabled + inventoryUI + playerInventoryUI
         */
 
         // Darken the screen
@@ -113,11 +109,13 @@ public class GameMaster : MonoBehaviour
 
         // Position the player & camera
         playerGameObject.transform.position = new Vector3(0, 4, 0);
-        Camera.main.transform.position = new Vector3(0, 0, -10);
+        Camera.main.GetComponent<CameraFollow>().enabled = true;
 
         // Enable player components
         playerGameObject.GetComponent<PlayerMove>().enabled = true;
         playerGameObject.GetComponent<PlayerCombat>().enabled = true;
+        UIScriptsGameObject.GetComponent<InventoryUI>().enabled = true;
+        playerUIGameObject.SetActive(true);
 
         // Lightne the screen 
         while(fadePanel.color != Color.clear){

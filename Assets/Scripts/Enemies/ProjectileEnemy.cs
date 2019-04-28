@@ -8,8 +8,11 @@ public class ProjectileEnemy : EnemyBase
     public GameObject projectilePrefab;
     public float fireRateInSeconds = 1.0f; // 1/per second
     public float projectileSpeed = 4.0f;
+    public float shootingRange = 4.0f;
 
     private Vector2 goalPos;
+
+    private bool isShooting = false;
 
     private void Start(){
         BaseStart();
@@ -18,7 +21,24 @@ public class ProjectileEnemy : EnemyBase
     }
 
     private void Update() {
-        if(enemyState == EnemyState.PATROLLING && !knockedBack){
+
+        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        if(distanceToPlayer < shootingRange){
+            if(!isShooting){
+                StartCoroutine("ShootAtPlayer");
+                isShooting = true;
+                animator.SetTrigger("attack_trigger");
+            }
+        }
+        else{
+            if(isShooting){
+                animator.SetTrigger("patrol_trigger");
+            }
+            StopCoroutine("ShootAtPlayer");
+            isShooting = false;
+        }
+
+        if(enemyState == EnemyState.PATROLLING && !knockedBack && !isShooting){
             float distance = ((Vector2)transform.position - goalPos).magnitude;
             if(distance > 0.1f){
                 MoveRigidbodyTowards(goalPos, patrolSpeed);
@@ -27,6 +47,15 @@ public class ProjectileEnemy : EnemyBase
                 goalPos = GetRandomPointInsideZone();
             }
         }
+
+        // Animation directionality
+        Vector2 velocityVector = rBody.velocity.normalized;
+        animator.SetFloat("x", velocityVector.x);
+        animator.SetFloat("y", velocityVector.y);
+
+        Vector2 playerVector = (playerTransform.position - transform.position).normalized;
+        animator.SetFloat("x_player", playerVector.x);
+        animator.SetFloat("y_player", playerVector.y);
     }
 
     public override void TakeDamage(int howMuch, float knockBack){
@@ -37,20 +66,6 @@ public class ProjectileEnemy : EnemyBase
 
         if(HP <= 0)
             Die();
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.GetComponent<PlayerCombat>() != null){
-            enemyState = EnemyState.CHASING;
-            StartCoroutine("ShootAtPlayer");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other) {
-        if(other.GetComponent<PlayerCombat>() != null) {
-            enemyState = EnemyState.PATROLLING;
-            StopCoroutine("ShootAtPlayer");
-        }
     }
 
     private IEnumerator ShootAtPlayer(){

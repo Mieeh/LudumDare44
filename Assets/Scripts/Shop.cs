@@ -12,9 +12,9 @@ public class Shop : MonoBehaviour
     public GameObject shopHolderObject;
     public TMP_Text itemName;
     public TMP_Text itemFlavourText;
-    public TMP_Text itemStatText;
-    public TMP_Text playerValueText;
     public Image itemImage;
+    public TMP_Text itemValue, itemDamage, itemDefense;
+    public TMP_Text playerValueText;
 
     private PlayerInventory playerInventory;
     private PlayerCombat playerCombat;
@@ -51,6 +51,12 @@ public class Shop : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Space)){
                 SellCurrentItem();
             }
+
+        }
+        playerValueText.text = playerCombat.HP.ToString();
+
+        if(Input.GetKeyDown(KeyCode.X)){
+            FindObjectOfType<GameMaster>().GotoDungeon();
         }
     }
 
@@ -93,14 +99,17 @@ public class Shop : MonoBehaviour
 
     public void UpdateCurrentItem(){
 
-        playerValueText.text = "You have: " + playerCombat.HP.ToString();
+        //playerValueText.text = "You have: " + playerCombat.HP.ToString();
 
         if(playerInventory.itemList.Count == 0){
             itemName.text = "No item left!";
 
             itemFlavourText.text = "";
             itemImage.color = Color.clear;
-            itemStatText.text = "";
+
+            itemValue.text = "0";
+            itemDamage.text = "0";
+            itemDefense.text = "0";
 
             desiredIndex = -1;
             return;
@@ -112,18 +121,11 @@ public class Shop : MonoBehaviour
 
         itemImage.sprite = _item.GetComponent<SpriteRenderer>().sprite;
         itemImage.color = Color.white;
+
+        itemValue.text = _item.value.ToString();
+        itemDamage.text = _item.damage.ToString();
+        itemDefense.text = _item.defense.ToString();
         
-        string statText = "Value: " + _item.value.ToString();
-        if(_item.itemType == Item.ItemType.WEAPON){
-            statText += "\nDamage: " + _item.damage.ToString();
-        }
-        else if(_item.itemType == Item.ItemType.ARMOR){
-            statText += "\nArmor: " + _item.defense.ToString(); 
-        }
-
-        statText += "\nPress Space to sell!";
-
-        itemStatText.text = statText;
     }
 
 }
