@@ -52,8 +52,8 @@ public class PlayerMove : MonoBehaviour
             isSprinting = false;
         }
         isMoving = false;
+        
 
-        /* 
         if (Input.GetKeyDown(KeyCode.K) && !isDodging) {
             if (horizontalInput != 0 || verticalInput != 0) {
                 dodgeDirection.x = Mathf.Lerp(0, horizontalInput, 0.9f);
@@ -63,7 +63,6 @@ public class PlayerMove : MonoBehaviour
                 StartCoroutine("InvincibilityTimer");
             }
         }
-        */
     }
 
     private void FixedUpdate() {
@@ -79,7 +78,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    /* 
     IEnumerator InvincibilityTimer() {
         isInvincible = true;
         yield return new WaitForSeconds(invincibilityTimeInSeconds);
@@ -90,12 +88,11 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(dodgeTimeInSeconds);
         isDodging = false;
     }
-    */
 
     void Move(){
         if (isDodging) {
             timeElapsed += Time.deltaTime;
-            rb.velocity = dodgeDirection * (moveSpeed / Mathf.Pow(timeElapsed + 0.3f, 2) / dodgeDirection.magnitude);
+            rb.velocity = dodgeDirection * (moveSpeed / Mathf.Pow(timeElapsed + 0.55f, 2) / dodgeDirection.magnitude);
         } else {
             horizontalSpeed = Mathf.Lerp(0, horizontalInput, 0.9f);
             verticalSpeed = Mathf.Lerp(0, verticalInput, 0.9f);

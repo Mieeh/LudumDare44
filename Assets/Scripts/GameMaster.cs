@@ -46,6 +46,7 @@ public class GameMaster : MonoBehaviour
         const float lightenSpeed = 0.7f;
 
         // Disable the players stuff
+        playerGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerGameObject.GetComponent<PlayerMove>().enabled = false;
         playerGameObject.GetComponent<PlayerCombat>().enabled = false;
         UIScriptsGameObject.GetComponent<InventoryUI>().enabled = false;

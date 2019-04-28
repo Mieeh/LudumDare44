@@ -102,7 +102,7 @@ public class Ogre : EnemyBase
 
         // knockback away from the player
         StopCoroutine("GetKnockedBack");
-        StartCoroutine(GetKnockedBack(knockBack*0.5f));
+        StartCoroutine(GetKnockedBack(knockBack*1000*0.5f));
 
         // Did we die?
         if(HP <= 0)

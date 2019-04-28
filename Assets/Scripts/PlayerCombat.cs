@@ -21,17 +21,20 @@ public class PlayerCombat : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerMove playerMove;
     private PlayerInventory playerInventory;
+    private SpriteRenderer spre;
     private List<Vector3> attackColliderPositions = new List<Vector3>();
     public float stunTimer = 1.0f;
 
     private AttackDirection attackDirection;
     private bool isAttacking = false;
     public float attackLengthInSeconds;
+    private bool attackInvincibility = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerMove = GetComponent<PlayerMove>();
         playerInventory = GetComponent<PlayerInventory>();
+        spre = GetComponent<SpriteRenderer>();
 
         attackColliderPositions.Add(new Vector3(0, 1));
         attackColliderPositions.Add(new Vector3(1, 0));
@@ -62,13 +65,18 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack(){
         // If we're already attacking, STOP and return 
-        if(isAttacking || playerMove.isDodging)
+        if(isAttacking || playerMove.isDodging || attackInvincibility)
             return;
 
+        StopCoroutine("AttackCoroutine");
         StartCoroutine("AttackCoroutine");
     }
 
     public void GetAttacked(EnemyBase enemy){
+        if(playerMove.isInvincible || attackInvincibility){
+            return;
+        }
+
         int damage = ConvertToPlayerDamage(enemy.attack);
         HP-=damage;
         if(HP <= 0){
@@ -79,6 +87,10 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void GetAttacked(Vector2 position, int howMuch){
+        if(playerMove.isInvincible){
+            return;
+        }
+
         int damage = ConvertToPlayerDamage(howMuch);
         HP-=damage;
         if(HP <= 0){
@@ -104,25 +116,28 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public int GetPlayerKnockBack(){
-        
         if(playerInventory.currentWeapon != null){
             return playerInventory.currentWeapon.knockBack;
         }
 
         return 0;
     }
-
+ 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Projectile"){
-            GetAttacked(other.transform.position, other.GetComponent<Projectile>().damage);
-            Destroy(other.gameObject);
+            if(!playerMove.isInvincible || !attackInvincibility){
+                GetAttacked(other.transform.position, other.GetComponent<Projectile>().damage);
+                Destroy(other.gameObject);
+            }
         }
         if(other.tag == "Entrance"){
             // Goto SHOP!
             FindObjectOfType<GameMaster>().GotoShop();
         }
         if(other.tag == "OgreAttackCollider"){
-            GetAttacked(other.GetComponentInParent<EnemyBase>());
+            if(!playerMove.isInvincible || !attackInvincibility){
+                GetAttacked(other.GetComponentInParent<EnemyBase>());
+            }
         }
     }
 
@@ -132,7 +147,7 @@ public class PlayerCombat : MonoBehaviour
         rb.velocity = Vector2.zero;
         
         GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
-        GetComponent<Collider2D>().isTrigger = true;
+        attackInvincibility = true;
 
         // Apply the knockback force
         Vector2 dir = (Vector3)position - transform.position;
@@ -148,7 +163,7 @@ public class PlayerCombat : MonoBehaviour
         yield return new WaitForSeconds(stunTimer*0.7f);
 
         GetComponent<SpriteRenderer>().color = Color.white;
-        GetComponent<Collider2D>().isTrigger = false;
+        attackInvincibility = false;
     }
 
     private IEnumerator AttackCoroutine(){

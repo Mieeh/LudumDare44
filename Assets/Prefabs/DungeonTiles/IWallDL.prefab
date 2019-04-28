@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3727167187881438283}
   - component: {fileID: 1935572640838015785}
   m_Layer: 0
-  m_Name: tileset_34
+  m_Name: IWallDL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 870443136b0be77448fb346dfe8740ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

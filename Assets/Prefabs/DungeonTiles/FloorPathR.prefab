@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3864705396822837447}
   - component: {fileID: 92480543253977834}
   m_Layer: 0
-  m_Name: tileset_2
+  m_Name: FloorPathR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 870443136b0be77448fb346dfe8740ce, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
