@@ -15,5 +15,8 @@ public class PlayerAttackCollider : MonoBehaviour
         if(other.GetComponent<EnemyBase>() != null && !other.isTrigger){
             other.GetComponent<EnemyBase>().TakeDamage(playerCombat.GetPlayerAttack(), 400f);
         }
+        if(other.tag == "LootCrate"){
+            other.GetComponent<LootCrate>().GetDestroyed();
+        }
     }
 }
