@@ -200,11 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6a7f5b72966a34d9b2a55dc11be06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 60
-  attack: 20
+  HP: 24
+  attack: 150
   knockStunTime: 0.73
-  itemPool: []
-  chanceOfDropping: 0
+  junkItems: []
+  equipmentItems: []
   patrollingZone: {fileID: 0}
   patrollingSpeed: 1
   chasingSpeed: 2

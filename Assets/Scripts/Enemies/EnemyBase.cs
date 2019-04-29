@@ -14,9 +14,11 @@ public abstract class EnemyBase : MonoBehaviour
     public int HP;
     public int attack;
     public float knockStunTime; // For how many seconds is the enemy supposed to be "stunned"
-    public List<Item> itemPool;
-    [Range(0, 1)]
-    public float chanceOfDropping;
+    public List<Item> junkItems = new List<Item>();
+    public List<Item> equipmentItems = new List<Item>();
+    
+    private const float rollChance = 1.0f-0.16f;
+
     protected EnemyState enemyState = EnemyState.PATROLLING;
 
     protected bool knockedBack = false;
@@ -77,7 +79,6 @@ public abstract class EnemyBase : MonoBehaviour
         yield return new WaitForSeconds(knockStunTime);
 
         knockedBack = false;
-
     }
 
     protected void Die(){
@@ -86,16 +87,30 @@ public abstract class EnemyBase : MonoBehaviour
         FindObjectOfType<GameMaster>().SpawnDeathBlood(transform.position);
 
         // Spawn item?
-        if(itemPool.Count > 0) {
-            float rand = Random.Range(0.0f, 1.0f);
-            if(rand >= 1.0f-chanceOfDropping){
-                // Yes, we drop some random item from our pool
-                int randIndex = Random.Range(0, itemPool.Count);
-                GameObject spawnedItem = Instantiate(itemPool[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
-                // Place under dungeon
-                spawnedItem.transform.SetParent(FindObjectOfType<GameMaster>().dungeonGameObject.transform);
+        bool dropJunk = false, dropEquipment = false;
+
+        float rand = Random.Range(0.0f, 1.0f);
+        // Roll for junk drop
+        if(rand >= rollChance){
+            dropJunk = true;
+            // Roll for equipment
+            rand = Random.Range(0.0f, 1.0f);
+            if(rand >= rollChance){
+                dropEquipment = true;
             }
         }
+
+        if(dropEquipment == true){
+            if(equipmentItems.Count != 0){
+                // Drop random equipment from the equpmentItems list
+            }
+            else{
+                // Drop random junk
+            }
+        }
+        else if(dropJunk == true){
+            // Drop junk
+        } 
 
         // Disable, basically remove the enemy 
         rBody.simulated = false;
