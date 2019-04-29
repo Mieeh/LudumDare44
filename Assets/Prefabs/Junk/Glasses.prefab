@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Bubbles Glasses
-  flavourText: '*insert flavor text*'
+  flavourText: "Glasses are supposed to correct poor vision but I don\u2019t think
+    anyone could see through glasses with this amount of strength."
   itemType: 2
   value: 500
   damage: 0

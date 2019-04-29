@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Silver Bar
-  flavourText: '*insert flavor text*'
+  flavourText: "Maybe I can sell this silver bar for a quick buck\u2026 I shall call
+    it quicksilver!"
   itemType: 2
   value: 1000
   damage: 0

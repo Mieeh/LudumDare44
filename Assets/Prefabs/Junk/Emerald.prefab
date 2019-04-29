@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Emerald
-  flavourText: '*insert flavor text*'
+  flavourText: Some emeralds are said to contain chaotic power, but this just seems
+    like a normal gemstone to me.
   itemType: 2
   value: 10000
   damage: 0

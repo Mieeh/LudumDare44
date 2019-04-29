@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Man-Spider Comic
-  flavourText: '*insert flavor text*'
+  flavourText: "A comic about the superhero Man-Spider. It\u2019s about a spider that
+    mutated once it was bitten by a radioactive man."
   itemType: 2
   value: 1000
   damage: 0

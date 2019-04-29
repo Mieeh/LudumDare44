@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Ruby
-  flavourText: '*insert flavor text*'
+  flavourText: These gemstones are rare and were once associated with a large animal-like
+    creature who lived underground.
   itemType: 2
   value: 50000
   damage: 0

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Dou
-  flavourText: '*insert flavor text*'
+  flavourText: While very intricate, it's also incredibly old.
   itemType: 1
   value: 250
   damage: 0
