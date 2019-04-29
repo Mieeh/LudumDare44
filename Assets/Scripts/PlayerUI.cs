@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     public Image ropeImage;
     public GameObject ropeGiverWorldObject;
     public GameObject RelicUIGameObject;
+    public GameObject InventoryUIObject;
 
     private PlayerCombat playerCombat;
 
@@ -29,7 +30,7 @@ public class PlayerUI : MonoBehaviour
         healthText.text = playerCombat.HP.ToString();
 
         // Use rope
-        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope && playerCombat.canEscape && playerCombat.HP > 0){
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope && playerCombat.canEscape && playerCombat.HP > 0 && !InventoryUIObject.activeInHierarchy){
             print("Used Escape Rope");
             hasRope = false;
             ropeUseText.gameObject.SetActive(false);
