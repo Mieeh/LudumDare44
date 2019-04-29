@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Basketball
-  flavourText: '*insert flavor text*'
+  flavourText: We're bringing it home, for sure. After which it'd be sold.
   itemType: 2
   value: 250
   damage: 0

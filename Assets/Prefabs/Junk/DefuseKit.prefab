@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Defuse Kit
-  flavourText: '*insert flavor text*'
+  flavourText: It doesn't actually defuse anything. It just has two wires which attach
+    via magnets.
   itemType: 2
   value: 1000
   damage: 0

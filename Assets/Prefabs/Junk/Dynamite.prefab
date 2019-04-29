@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Dynamite
-  flavourText: '*insert flavor text*'
+  flavourText: The fuse is way too short to be safely used. Not too short to be sold,
+    though.
   itemType: 2
   value: 100
   damage: 0

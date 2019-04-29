@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Hot Dog
-  flavourText: '*insert flavor text*'
+  flavourText: While slightly old, its dynamic nature ensures it can be sold for at
+    least something.
   itemType: 2
   value: 50
   damage: 0

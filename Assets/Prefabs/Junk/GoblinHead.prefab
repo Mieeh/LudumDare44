@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Goblin's Head
-  flavourText: '*insert flavor text*'
+  flavourText: I seem to have aimed just right. Can probably be sold to someone looking
+    for a trophy with the unwillingness to actually enter the dungeon.
   itemType: 2
   value: 50
   damage: 0
