@@ -153,7 +153,7 @@ MonoBehaviour:
   - {fileID: 4620749435037025879, guid: f89cda0f0bb2234469e5374e89211360, type: 3}
   patrollingZone: {fileID: 0}
   patrollingSpeed: 1
-  chaseSpeed: 2
+  chaseSpeed: 3
   chaseRange: 4
 --- !u!95 &3150217617593534377
 Animator:
