@@ -21,7 +21,6 @@ public class PlayerInventory : MonoBehaviour
     }
     
     public void AddItem(Item itemToAdd){
-
         // @ Maybe auto equip if we dont have any weapon or armor equiped
         if(itemList.Count < ITEM_MAX_COUNT){
             itemToAdd.gameObject.SetActive(false);

@@ -51,7 +51,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Update(){
         // Input for attack
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(InputKeys.ATTACK_KEY)){
             Attack();
         }
 
