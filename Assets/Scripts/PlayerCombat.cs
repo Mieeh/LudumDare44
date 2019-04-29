@@ -82,6 +82,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else{
             animController.enabled = true;
+            
         }
     }
 
@@ -101,7 +102,7 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
-        // Spawn blooderino
+         // Spawn blooderino
         FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
 
         int damage = ConvertToPlayerDamage(enemy.attack);
