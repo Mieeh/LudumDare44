@@ -24,7 +24,7 @@ public class ProjectileEnemy : EnemyBase
         {
             float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
             if(distanceToPlayer < shootingRange){
-                if(!isShooting && HP > 0){
+                if(!isShooting){
                     StartCoroutine("ShootAtPlayer");
                     isShooting = true;
                     animator.SetTrigger("attack_trigger");
@@ -79,22 +79,24 @@ public class ProjectileEnemy : EnemyBase
         while(true){
             yield return new WaitForSeconds(fireRateInSeconds);
             
-            // SFX
-            SoundEffectsSystem.PlaySFX("goblin_attack");
+            if(HP > 0){
+                // SFX
+                SoundEffectsSystem.PlaySFX("goblin_attack");
 
-            // Shoot projectile!
-            GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity) as GameObject;
-            
-            // Shoot the projectile towards the player
-            Vector2 dir = playerTransform.position - transform.position;
-            dir.Normalize();
-            projectile.GetComponent<Rigidbody2D>().velocity = dir*projectileSpeed;
+                // Shoot projectile!
+                GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity) as GameObject;
+                
+                // Shoot the projectile towards the player
+                Vector2 dir = playerTransform.position - transform.position;
+                dir.Normalize();
+                projectile.GetComponent<Rigidbody2D>().velocity = dir*projectileSpeed;
 
-            // Make sure the projectile deals the correct amount of damage!
-            projectile.GetComponent<Projectile>().damage = attack; 
+                // Make sure the projectile deals the correct amount of damage!
+                projectile.GetComponent<Projectile>().damage = attack; 
 
-            // Make sure the projectile is destroyed after some amount of time!
-            Destroy(projectile, 6);
+                // Make sure the projectile is destroyed after some amount of time!
+                Destroy(projectile, 6);
+            }
         }
     }
     
