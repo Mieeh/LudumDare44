@@ -65,7 +65,7 @@ public class Shop : MonoBehaviour
         }
         playerValueText.text = playerCombat.HP.ToString();
 
-        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY)){
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && shopHolderObject.activeInHierarchy){
             FindObjectOfType<GameMaster>().GotoDungeon();
         }
 
