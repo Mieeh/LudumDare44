@@ -35,6 +35,8 @@ public class PlayerCombat : MonoBehaviour
     public bool attackInvincibility = false;
     private CameraFollow cam;
 
+    public bool canEscape = true;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerMove = GetComponent<PlayerMove>();
@@ -94,6 +96,10 @@ public class PlayerCombat : MonoBehaviour
 
         animController.SetTrigger("attack_trigger");
 
+        // Can escape bool
+        StopCoroutine("CanEscapeCoroutine");
+        StartCoroutine("CanEscapeCoroutine");
+
         // SFX
         SoundEffectsSystem.PlaySFX("player_attack");
 
@@ -105,6 +111,10 @@ public class PlayerCombat : MonoBehaviour
         if(playerMove.isInvincible || attackInvincibility){
             return;
         }
+
+        // Can escape bool
+        StopCoroutine("CanEscapeCoroutine");
+        StartCoroutine("CanEscapeCoroutine");
 
          // Spawn blooderino
         FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
@@ -126,6 +136,10 @@ public class PlayerCombat : MonoBehaviour
         if(playerMove.isInvincible){
             return;
         }
+
+        // Can escape bool
+        StopCoroutine("CanEscapeCoroutine");
+        StartCoroutine("CanEscapeCoroutine");
 
         // Spawn blooderino
         FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
@@ -239,6 +253,16 @@ public class PlayerCombat : MonoBehaviour
         attackCollider.enabled = false;
         attackCollider.transform.localPosition = Vector2.zero;
         isAttacking = false;
+    }
+
+    private IEnumerator CanEscapeCoroutine(){
+        
+        canEscape = false;
+        
+        const int timeBeforeRecall = 2;
+        yield return new WaitForSeconds(timeBeforeRecall);
+
+        canEscape = true;
     }
 
 }

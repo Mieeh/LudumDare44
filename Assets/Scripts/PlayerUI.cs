@@ -29,7 +29,7 @@ public class PlayerUI : MonoBehaviour
         healthText.text = playerCombat.HP.ToString();
 
         // Use rope
-        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope){
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope && playerCombat.canEscape && playerCombat.HP > 0){
             print("Used Escape Rope");
             hasRope = false;
             ropeUseText.gameObject.SetActive(false);
