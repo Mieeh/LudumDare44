@@ -145,7 +145,7 @@ public class Ogre : EnemyBase
         attackCollider.transform.localPosition = ogreAttackPositions[bestIndex];
         attackCollider.enabled = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
 
         attackCollider.enabled = false;
 
