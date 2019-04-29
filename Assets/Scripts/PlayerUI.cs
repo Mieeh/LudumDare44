@@ -96,9 +96,9 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator SignCoroutine(){
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
 
-        const float signWaitTime = 0.075f;
+        const float signWaitTime = 0.045f;
 
         signText.text = "";
         foreach(char c in lastSignMessage){

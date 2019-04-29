@@ -153,7 +153,7 @@ public class PlayerCombat : MonoBehaviour
 
     public int ConvertToPlayerDamage(int attack){
         if(playerInventory.currentArmor != null){
-            return attack * (playerInventory.currentArmor.defense/100);
+            return (int)(attack * (1 - (playerInventory.currentArmor.defense/100.0f)));
         }
         return attack;
     }

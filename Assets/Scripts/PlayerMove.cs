@@ -6,8 +6,8 @@ public class PlayerMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     public bool isSprinting, isMoving, isDodging, isInvincible;
-    private float moveSpeed = 3.5f;
-    private float sprintSpeed = 5f;
+    private float moveSpeed = 4.5f;
+    private float sprintSpeed = 6f;
     private float invincibilityTimeInSeconds = 0.7f;
     private float dodgeTimeInSeconds = 0.8f;
     float verticalInput, horizontalInput, verticalSpeed, horizontalSpeed, timeElapsed;

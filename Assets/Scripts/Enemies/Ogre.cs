@@ -35,58 +35,60 @@ public class Ogre : EnemyBase
 
     private void Update() {
         // Chase player or nah?
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        if(distanceToPlayer < chaseRange){
-            enemyState = EnemyState.CHASING;
-        }
-        else{
-            enemyState = EnemyState.PATROLLING;
-        }
-
-        // Close enough to attack?
-        if(distanceToPlayer < attackRange){
-            if(!isAttacking){
-                StartCoroutine("AttackCoroutine");
-            }
-        }
-
-        if(enemyState == EnemyState.PATROLLING && !knockedBack && !isAttacking){
-            // Move towards goalPos
-            float distance = ((Vector2)transform.position - goalPos).magnitude; 
-            if(distance > 0.1f) {
-                MoveRigidbodyTowards(goalPos, patrollingSpeed);
+        if(this.HP > 0) {
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+            if(distanceToPlayer < chaseRange){
+                enemyState = EnemyState.CHASING;
             }
             else{
-                goalPos = GetRandomPointInsideZone();
+                enemyState = EnemyState.PATROLLING;
             }
-        }
-        else if(enemyState == EnemyState.CHASING && !knockedBack && !isAttacking){
-            // Chase the player!
-            float distance = (playerTransform.position - transform.position).magnitude;
-            if(distance > 0.1f){
-                MoveRigidbodyTowards((Vector2)playerTransform.position, chasingSpeed);
+
+            // Close enough to attack?
+            if(distanceToPlayer < attackRange){
+                if(!isAttacking){
+                    StartCoroutine("AttackCoroutine");
+                }
             }
-        }
 
-        // Animation directionality
-        Vector2 velocityVector = rBody.velocity.normalized;
-        animator.SetFloat("x", velocityVector.x);
-        animator.SetFloat("y", velocityVector.y);
+            if(enemyState == EnemyState.PATROLLING && !knockedBack && !isAttacking){
+                // Move towards goalPos
+                float distance = ((Vector2)transform.position - goalPos).magnitude; 
+                if(distance > 0.1f) {
+                    MoveRigidbodyTowards(goalPos, patrollingSpeed);
+                }
+                else{
+                    goalPos = GetRandomPointInsideZone();
+                }
+            }
+            else if(enemyState == EnemyState.CHASING && !knockedBack && !isAttacking){
+                // Chase the player!
+                float distance = (playerTransform.position - transform.position).magnitude;
+                if(distance > 0.1f){
+                    MoveRigidbodyTowards((Vector2)playerTransform.position, chasingSpeed);
+                }
+            }
 
-        if(enemyState == EnemyState.CHASING) {
-            if(playerTransform.position.x > transform.position.x){
-                spre.flipX = false;
+            // Animation directionality
+            Vector2 velocityVector = rBody.velocity.normalized;
+            animator.SetFloat("x", velocityVector.x);
+            animator.SetFloat("y", velocityVector.y);
+
+            if(enemyState == EnemyState.CHASING) {
+                if(playerTransform.position.x > transform.position.x){
+                    spre.flipX = false;
+                }
+                else{
+                    spre.flipX = true;
+                }
             }
             else{
-                spre.flipX = true;
-            }
-        }
-        else{
-            if(velocityVector.x > 0){
-                spre.flipX = false;
-            }
-            else{
-                spre.flipX = true;
+                if(velocityVector.x > 0){
+                    spre.flipX = false;
+                }
+                else{
+                    spre.flipX = true;
+                }
             }
         }
     }
@@ -104,7 +106,7 @@ public class Ogre : EnemyBase
 
         // knockback away from the player
         StopCoroutine("GetKnockedBack");
-        StartCoroutine(GetKnockedBack(knockBack*1000*0.5f));
+        StartCoroutine(GetKnockedBack(knockBack*10*0.5f));
 
         // Did we die?
         if(HP <= 0){

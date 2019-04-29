@@ -19,13 +19,13 @@ public class Toll : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Space) && playerInside){
+        if(Input.GetKeyDown(InputKeys.INTERACT) && playerInside){
             if(playerCombat.HP > cost){
                 playerCombat.HP -= cost;
                 StartCoroutine("OpenToll");
             }
             else{
-                tollText.text += "\n<color=#AC3532Not enough!</color>";
+                tollText.text = "Pay me <color=#AC3532>" + cost + "</color> to pass! \nPress <color=green>L</color> to pay" + "\n<color=#AC3532>Not enough!</color>";
             }
         }
     }
