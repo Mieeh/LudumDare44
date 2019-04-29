@@ -145,7 +145,10 @@ MonoBehaviour:
   HP: 20
   attack: 750
   knockStunTime: 0
-  junkItems: []
+  junkItems:
+  - {fileID: 4620749435037025879, guid: d7188e6f7ff5e6d43870f0ed21df8ea4, type: 3}
+  - {fileID: 4620749435037025879, guid: cdeb964d41e5556488d95a7bc9d72f3e, type: 3}
+  - {fileID: 4620749435037025879, guid: 2c0267cc81edfb2469201f2e767155b5, type: 3}
   equipmentItems: []
   patrollingZone: {fileID: 0}
   patrolSpeed: 1
