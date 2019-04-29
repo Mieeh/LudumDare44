@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5532361344490186385}
   - component: {fileID: 5532361344490186398}
   - component: {fileID: 3150217617593534377}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpiderZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
