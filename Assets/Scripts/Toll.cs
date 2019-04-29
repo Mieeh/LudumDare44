@@ -12,7 +12,8 @@ public class Toll : MonoBehaviour
     public TMP_Text tollText;
     private PlayerCombat playerCombat;
 
-    private bool playerInside = false;
+    [System.NonSerialized]
+    public bool playerInside = false;
 
     private void Start() {
         playerCombat = FindObjectOfType<PlayerCombat>();

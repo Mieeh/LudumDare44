@@ -15,6 +15,8 @@ public class GameMaster : MonoBehaviour
     private GameObject UIScriptsGameObject;
     public GameObject playerUIGameObject;
     public GameObject SlashBloodPrefab, DeathBloodPrefab;
+    public GameObject[] UIToDisableOnShop;
+    private Toll toll;
 
     // Music themes
     public AudioClip dungeon_theme, shop_theme;
@@ -32,6 +34,7 @@ public class GameMaster : MonoBehaviour
         playerGameObject = FindObjectOfType<PlayerMove>().gameObject;
         UIScriptsGameObject = FindObjectOfType<InventoryUI>().gameObject; // InventoryUI & Shop scripts
         shopScript = FindObjectOfType<Shop>();
+        toll = FindObjectOfType<Toll>();
         audio_source = GetComponent<AudioSource>();
     }
 
@@ -133,6 +136,12 @@ public class GameMaster : MonoBehaviour
         playerGameObject.GetComponent<SpriteRenderer>().sprite = playerGameObject.GetComponent<PlayerCombat>().idleSprites[(int)PlayerCombat.AttackDirection.UP];
         UIScriptsGameObject.GetComponent<InventoryUI>().enabled = false;
         playerUIGameObject.SetActive(false);
+
+        // Disable all sorts of ui
+        foreach(var x in UIToDisableOnShop){
+            x.SetActive(false);
+        }
+        toll.PlayerLeft();
 
         // Darken the screen
         while(fadePanel.color != Color.black){

@@ -15,6 +15,8 @@ public class Spider : EnemyBase
     private void Start() {
         BaseStart();
 
+        StartCoroutine("ChangeDirection");
+
         goalPos = GetRandomPointInsideZone();
     }
 
@@ -76,6 +78,13 @@ public class Spider : EnemyBase
             animator.SetTrigger("attack_trigger");
             // SFX
             SoundEffectsSystem.PlaySFX("spider_attack");
+        }
+    }
+
+    private IEnumerator ChangeDirection(){
+        while(true){
+            yield return new WaitForSeconds(2.0f);
+            goalPos = GetRandomPointInsideZone();
         }
     }
 

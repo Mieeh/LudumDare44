@@ -23,6 +23,8 @@ public class Ogre : EnemyBase
     private void Start() {
         BaseStart();
 
+        StartCoroutine("ChangeDirection");
+
         goalPos = GetRandomPointInsideZone();
 
         spre = GetComponent<SpriteRenderer>();
@@ -148,5 +150,12 @@ public class Ogre : EnemyBase
         attackCollider.enabled = false;
 
         isAttacking = false;
+    }
+
+    private IEnumerator ChangeDirection(){
+        while(true){
+            yield return new WaitForSeconds(2.0f);
+            goalPos = GetRandomPointInsideZone();
+        }
     }
 }

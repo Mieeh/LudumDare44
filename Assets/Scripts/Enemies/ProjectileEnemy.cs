@@ -17,6 +17,8 @@ public class ProjectileEnemy : EnemyBase
     private void Start(){
         BaseStart();
 
+        StartCoroutine("ChangeDirection");
+
         goalPos = GetRandomPointInsideZone();
     }
 
@@ -97,6 +99,13 @@ public class ProjectileEnemy : EnemyBase
                 // Make sure the projectile is destroyed after some amount of time!
                 Destroy(projectile, 6);
             }
+        }
+    }
+
+    private IEnumerator ChangeDirection(){
+        while(true){
+            yield return new WaitForSeconds(2.0f);
+            goalPos = GetRandomPointInsideZone();
         }
     }
     

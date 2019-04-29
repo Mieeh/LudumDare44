@@ -30,6 +30,7 @@ public class PlayerUI : MonoBehaviour
 
         // Use rope
         if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope){
+            print("Used Escape Rope");
             hasRope = false;
             ropeUseText.gameObject.SetActive(false);
             ropeImage.gameObject.SetActive(false);
@@ -103,7 +104,7 @@ public class PlayerUI : MonoBehaviour
         signText.text = "";
         foreach(char c in lastSignMessage){
             // SFX
-            SoundEffectsSystem.PlaySFX("dialogue_blip");
+            //SoundEffectsSystem.PlaySFX("dialogue_blip");
 
             signText.text += c;
             yield return new WaitForSeconds(signWaitTime);
