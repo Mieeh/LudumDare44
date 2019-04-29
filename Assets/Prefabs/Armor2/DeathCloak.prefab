@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Death's Cloak
-  flavourText: '*insert flavor text*'
+  flavourText: I am Death. I have long walked by your side. Are you ready?
   itemType: 1
   value: 10000
   damage: 0

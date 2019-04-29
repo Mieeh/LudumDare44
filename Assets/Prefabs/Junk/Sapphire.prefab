@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Sapphire
-  flavourText: '*insert flavor text*'
+  flavourText: Move over lapis lazuli. This is both blue AND shiny!
   itemType: 2
   value: 1500
   damage: 0

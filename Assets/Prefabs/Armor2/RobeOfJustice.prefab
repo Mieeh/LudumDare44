@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Robe of Justice
-  flavourText: 
+  flavourText: Weird place to find the clothes of a Justice...
   itemType: 1
   value: 1000
   damage: 0

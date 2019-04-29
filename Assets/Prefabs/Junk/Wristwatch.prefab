@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wristwatch
-  flavourText: '*insert flavor text*'
+  flavourText: Time's the most precious resource. Hope I can lure someone to think
+    having this watch has anything to do with that.
   itemType: 2
   value: 5000
   damage: 0

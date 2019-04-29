@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Terry's Yoghurt
-  flavourText: '*insert flavor text*'
+  flavourText: It had a post-it note on it, saying it belonged to this "Terry." Sorry
+    Terry, but this yoghurt is now mine.
   itemType: 2
   value: 250
   damage: 0

@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Limit Breaker
-  flavourText: '*insert flavor text*'
+  flavourText: The inside of the shoulder pad says SOLDIER. Do they make these for
+    merchants too?
   itemType: 1
   value: 5000
   damage: 0

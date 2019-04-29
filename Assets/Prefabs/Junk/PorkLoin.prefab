@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Pork Loin
-  flavourText: '*insert flavor text*'
+  flavourText: I'd use this as a weapon if I could. Just imagine the enemy's surprise.
   itemType: 2
   value: 50
   damage: 0

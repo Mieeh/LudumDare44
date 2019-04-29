@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Pre-Owned Chestplate
-  flavourText: '*insert flavor text*'
+  flavourText: 'Note to self: Remove all warnings that might exist in this dungeon
+    so I can get more of these.'
   itemType: 1
   value: 5000
   damage: 0
