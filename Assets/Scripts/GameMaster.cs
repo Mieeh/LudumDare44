@@ -19,10 +19,12 @@ public class GameMaster : MonoBehaviour
     // Music themes
     public AudioClip dungeon_theme, shop_theme;
     private AudioSource audio_source;
-
+    
     private Shop shopScript;
 
     public Image fadePanel;
+
+    public TMPro.TMP_Text winText;
 
     private const float bgVolume = 0.5f;
 
@@ -48,6 +50,52 @@ public class GameMaster : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine("ChangeToDungeonTheme");
         StartCoroutine("GotoDungeonCoroutine");
+    }
+
+    public void WinGame(){
+        StartCoroutine("WinCoroutine");
+    }
+
+    private IEnumerator WinCoroutine(){
+        // Disable the players stuff
+        playerGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        playerGameObject.GetComponent<PlayerMove>().enabled = false;
+        playerGameObject.GetComponent<PlayerCombat>().enabled = false;
+        playerGameObject.GetComponent<PlayerUI>().enabled = false;
+        playerGameObject.GetComponent<Animator>().enabled = false;
+        playerGameObject.GetComponent<Collider2D>().enabled = false;
+        playerGameObject.GetComponent<SpriteRenderer>().sprite = playerGameObject.GetComponent<PlayerCombat>().idleSprites[(int)PlayerCombat.AttackDirection.UP];
+        UIScriptsGameObject.GetComponent<InventoryUI>().enabled = false;
+        playerUIGameObject.SetActive(false);
+
+        var spre = playerGameObject.GetComponent<SpriteRenderer>();
+
+        while(spre.color != Color.yellow){
+            spre.color = Vector4.MoveTowards(spre.color, Color.yellow, 0.6f*Time.deltaTime);
+            playerGameObject.transform.Translate(Vector3.up*1.5f*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        while(spre.color != Color.clear){
+            playerGameObject.transform.localScale = playerGameObject.transform.localScale + new Vector3(0.3f,0.3f,0)*Time.deltaTime;
+            spre.color = Vector4.MoveTowards(spre.color, Color.clear, 0.6f*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        while(fadePanel.color != Color.black){
+            fadePanel.color = Vector4.MoveTowards(fadePanel.color, Color.black, 1.5f*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        while(winText.color != Color.yellow){
+            winText.color = Vector4.MoveTowards(winText.color, Color.yellow, 1.1f*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(2.0f);
+
+        SceneManager.LoadScene("title_screen");
+
     }
 
     private IEnumerator GotoShopCoroutine(){

@@ -12,6 +12,7 @@ TagManager:
   - Sign
   - RopeGiver
   - Toll
+  - Relic
   layers:
   - Default
   - TransparentFX
