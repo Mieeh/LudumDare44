@@ -123,7 +123,7 @@ MonoBehaviour:
   flavourText: I don't know whose idea it was to bring this here. Perhaps as a means
     for a very light people to cross sudden water obstacles?
   itemType: 2
-  value: 25
+  value: 100
   damage: 0
   knockBack: 0
   defense: 0

@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Denim
-  flavourText: '*insert flavor text*'
+  flavourText: A perfectly fine pair of denim. Needs to be disinfected somehow before
+    I sell them, though.
   itemType: 2
-  value: 25
+  value: 250
   damage: 0
   knockBack: 0
   defense: 0

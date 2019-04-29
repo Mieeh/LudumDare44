@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: White Flag
-  flavourText: '*insert flavor text*'
+  flavourText: "There\u2019s a hint of blue and red on the sides\u2026 perhaps this
+    is an old relic of a bygone country?"
   itemType: 2
-  value: 25
+  value: 1000
   damage: 0
   knockBack: 0
   defense: 0

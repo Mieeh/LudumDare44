@@ -123,7 +123,7 @@ MonoBehaviour:
   flavourText: While I could technically claim this, the Ogres seem to have claimed
     the associated area for themselves...
   itemType: 2
-  value: 25
+  value: 500
   damage: 0
   knockBack: 0
   defense: 0

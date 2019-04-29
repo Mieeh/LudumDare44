@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Gold Bar
-  flavourText: '*insert flavor text*'
+  flavourText: "I can\u2019t believe heavy items like these used to symbolize wealth.
+    Still, the price for one of these is insane."
   itemType: 2
-  value: 25
+  value: 20000
   damage: 0
   knockBack: 0
   defense: 0
