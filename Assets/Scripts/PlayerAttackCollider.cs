@@ -20,6 +20,9 @@ public class PlayerAttackCollider : MonoBehaviour
         if(other.tag == "LootCrate"){
             other.GetComponent<LootCrate>().GetDestroyed();
             cam.LightShake();
+
+            // SFX
+            SoundEffectsSystem.PlaySFX("box_break");
         }
     }
 }

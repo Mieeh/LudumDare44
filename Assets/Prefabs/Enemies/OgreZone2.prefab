@@ -129,7 +129,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 118cccd9c41006f4e8aea5be4198085c, type: 3}
   m_Color: {r: 0.8867924, g: 0.44046062, b: 0.2216981, a: 1}
   m_FlipX: 0
@@ -203,8 +203,13 @@ MonoBehaviour:
   HP: 50
   attack: 1000
   knockStunTime: 0.73
-  junkItems: []
-  equipmentItems: []
+  junkItems:
+  - {fileID: 4620749435037025879, guid: b1cbc31b9c45b4c4893f67cb54469f38, type: 3}
+  - {fileID: 4620749435037025879, guid: ffc473a7cb5c97d42ab1c1af9c79e742, type: 3}
+  - {fileID: 4620749435037025879, guid: c09175c8c238c8041a0602c521dc1714, type: 3}
+  equipmentItems:
+  - {fileID: 4620749435037025879, guid: 25639a569df241e498622e391e31dedb, type: 3}
+  - {fileID: 4620749435037025879, guid: dafd3a5e03bddc8469d159e4361fd14f, type: 3}
   patrollingZone: {fileID: 0}
   patrollingSpeed: 1
   chasingSpeed: 2

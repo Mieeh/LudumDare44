@@ -24,6 +24,9 @@ public class Toll : MonoBehaviour
                 playerCombat.HP -= cost;
                 StartCoroutine("OpenToll");
             }
+            else{
+                tollText.text += "\n<color=#AC3532Not enough!</color>";
+            }
         }
     }
 
@@ -42,7 +45,7 @@ public class Toll : MonoBehaviour
     public void PlayerEntered(){
         playerInside = true;
         tollGameObject.SetActive(true);
-        tollText.text = "Pay me <color=#AC3532>" + cost + "</color> to pass! \nPress SPACE to pay";
+        tollText.text = "Pay me <color=#AC3532>" + cost + "</color> to pass! \nPress <color=green>L</color> to pay";
     }
     public void PlayerLeft(){
         playerInside = false;

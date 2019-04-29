@@ -78,9 +78,11 @@ public class PlayerMove : MonoBehaviour
     }
 
     IEnumerator InvincibilityTimer() {
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
         isInvincible = true;
         yield return new WaitForSeconds(invincibilityTimeInSeconds);
         isInvincible = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
     IEnumerator DodgeTimer() {
         isDodging = true;

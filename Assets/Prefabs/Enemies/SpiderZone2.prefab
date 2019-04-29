@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5532361344490186385}
   - component: {fileID: 5532361344490186398}
   - component: {fileID: 3150217617593534377}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpiderZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,11 +145,15 @@ MonoBehaviour:
   HP: 30
   attack: 500
   knockStunTime: 1
-  junkItems: []
-  equipmentItems: []
+  junkItems:
+  - {fileID: 4620749435037025879, guid: 609346db47c3ce44a9b2b0eee0d2febc, type: 3}
+  - {fileID: 4620749435037025879, guid: ccbb6beefc78c2a4ea638aac512fbda8, type: 3}
+  - {fileID: 4620749435037025879, guid: 0263807a5a1062b4693159a0b7b179da, type: 3}
+  equipmentItems:
+  - {fileID: 4620749435037025879, guid: f89cda0f0bb2234469e5374e89211360, type: 3}
   patrollingZone: {fileID: 0}
   patrollingSpeed: 1
-  chaseSpeed: 2
+  chaseSpeed: 3
   chaseRange: 4
 --- !u!95 &3150217617593534377
 Animator:

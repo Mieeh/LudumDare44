@@ -22,20 +22,25 @@ public class ProjectileEnemy : EnemyBase
 
     private void Update() {
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        if(distanceToPlayer < shootingRange){
-            if(!isShooting){
-                StartCoroutine("ShootAtPlayer");
-                isShooting = true;
-                animator.SetTrigger("attack_trigger");
+        if(HP < 0)
+            StopAllCoroutines();
+
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+            if(distanceToPlayer < shootingRange){
+                if(!isShooting){
+                    StartCoroutine("ShootAtPlayer");
+                    isShooting = true;
+                    animator.SetTrigger("attack_trigger");
+                }
             }
-        }
-        else{
-            if(isShooting){
-                animator.SetTrigger("patrol_trigger");
+            else{
+                if(isShooting){
+                    animator.SetTrigger("patrol_trigger");
+                }
+                StopCoroutine("ShootAtPlayer");
+                isShooting = false;
             }
-            StopCoroutine("ShootAtPlayer");
-            isShooting = false;
         }
 
         if(enemyState == EnemyState.PATROLLING && !knockedBack && !isShooting){
@@ -69,8 +74,8 @@ public class ProjectileEnemy : EnemyBase
 
         if(HP <= 0){
             SoundEffectsSystem.PlaySFX("goblin_death");
-            Die();
             StopCoroutine("ShootAtPlayer");
+            Die();
         }
     }
 

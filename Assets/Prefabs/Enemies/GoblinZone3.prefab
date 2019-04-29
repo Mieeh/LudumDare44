@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3368878386317238531}
   - component: {fileID: 1234307127726436134}
   - component: {fileID: 122173398}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GoblinZone3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,8 +145,12 @@ MonoBehaviour:
   HP: 40
   attack: 10000
   knockStunTime: 0
-  junkItems: []
-  equipmentItems: []
+  junkItems:
+  - {fileID: 4620749435037025879, guid: cdeb964d41e5556488d95a7bc9d72f3e, type: 3}
+  - {fileID: 4620749435037025879, guid: 2c0267cc81edfb2469201f2e767155b5, type: 3}
+  - {fileID: 4620749435037025879, guid: 590fce93c47ddae459e67618e649bb41, type: 3}
+  equipmentItems:
+  - {fileID: 4620749435037025879, guid: 412fd4e9feb2ff94c8083eeba0ee54dd, type: 3}
   patrollingZone: {fileID: 0}
   patrolSpeed: 1
   projectilePrefab: {fileID: 6627348859158593996, guid: 70cb7525dce43464f98912e55f20c926,

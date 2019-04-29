@@ -15,6 +15,7 @@ public class PlayerUI : MonoBehaviour
     public TMP_Text ropeUseText;
     public Image ropeImage;
     public GameObject ropeGiverWorldObject;
+    public GameObject RelicUIGameObject;
 
     private PlayerCombat playerCombat;
 
@@ -53,6 +54,14 @@ public class PlayerUI : MonoBehaviour
         else{
             ropeGiverWorldObject.GetComponent<Collider2D>().enabled = (true);
         }
+
+        // Relic
+        if(RelicUIGameObject.activeInHierarchy){
+            if(Input.GetKeyDown(InputKeys.INTERACT) && playerCombat.HP >= 100000){
+                RelicUIGameObject.SetActive(false);
+                FindObjectOfType<GameMaster>().WinGame();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -64,6 +73,9 @@ public class PlayerUI : MonoBehaviour
         if(other.tag == "RopeGiver"){
             ropeGiverGameObject.SetActive(true);
         }
+        if(other.tag == "Relic"){
+            RelicUIGameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -74,6 +86,9 @@ public class PlayerUI : MonoBehaviour
         }
         if(other.tag == "RopeGiver"){
             ropeGiverGameObject.SetActive(false);
+        }
+        if(other.tag == "Relic"){
+            RelicUIGameObject.SetActive(false);
         }
     }
 
