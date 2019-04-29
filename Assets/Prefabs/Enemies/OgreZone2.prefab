@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 3614663134343997659}
   - component: {fileID: 3614663134343997661}
   m_Layer: 0
-  m_Name: Ogre
+  m_Name: OgreZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 118cccd9c41006f4e8aea5be4198085c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.44046062, b: 0.2216981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -200,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a6a7f5b72966a34d9b2a55dc11be06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 24
-  attack: 150
+  HP: 50
+  attack: 1000
   knockStunTime: 0.73
   junkItems: []
   equipmentItems: []

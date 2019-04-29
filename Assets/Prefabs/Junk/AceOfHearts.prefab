@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Ace of Hearts
-  flavourText: '*insert flavor text*'
+  flavourText: While I'm more about Spades, I can always appreciate the Heart of the
+    cards.
   itemType: 2
   value: 500
   damage: 0

@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Milk
-  flavourText: '*insert flavor text*'
+  flavourText: 'Somehow still perfectly white. Could be sold to someone looking for
+    a '
   itemType: 2
   value: 250
   damage: 0

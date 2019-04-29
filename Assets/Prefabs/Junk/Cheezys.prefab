@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Cheezys
-  flavourText: '*insert flavor text*'
+  flavourText: These are made from actual cheese... better sell them before they start
+    to smell.
   itemType: 2
   value: 2500
   damage: 0

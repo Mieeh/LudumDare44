@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Glass of Water
-  flavourText: '*insert flavor text*'
+  flavourText: Incredibly easy to sell. Adventurers always bring too little water.
   itemType: 2
   value: 250
   damage: 0

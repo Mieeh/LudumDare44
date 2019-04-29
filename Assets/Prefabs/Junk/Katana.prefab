@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Katana
-  flavourText: '*insert flavor text*'
+  flavourText: Some people go crazy over these kinds of weapons. Perhaps I'll get
+    lucky.
   itemType: 0
   value: 1000
   damage: 7
