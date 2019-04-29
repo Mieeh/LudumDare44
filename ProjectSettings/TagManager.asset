@@ -9,6 +9,7 @@ TagManager:
   - Entrance
   - LootCrate
   - OgreAttackCollider
+  - Sign
   layers:
   - Default
   - TransparentFX

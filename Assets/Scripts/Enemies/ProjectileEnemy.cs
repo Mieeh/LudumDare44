@@ -67,14 +67,20 @@ public class ProjectileEnemy : EnemyBase
         StopCoroutine("GetKnockedBack");
         StartCoroutine(GetKnockedBack(knockBack));
 
-        if(HP <= 0)
+        if(HP <= 0){
+            SoundEffectsSystem.PlaySFX("goblin_death");
             Die();
+            StopCoroutine("ShootAtPlayer");
+        }
     }
 
     private IEnumerator ShootAtPlayer(){
         while(true){
             yield return new WaitForSeconds(fireRateInSeconds);
             
+            // SFX
+            SoundEffectsSystem.PlaySFX("goblin_attack");
+
             // Shoot projectile!
             GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity) as GameObject;
             

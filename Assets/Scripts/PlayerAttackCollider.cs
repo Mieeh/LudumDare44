@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerAttackCollider : MonoBehaviour
 {
     private PlayerCombat playerCombat;
+    private CameraFollow cam;
 
     private void Awake() {
+        cam = FindObjectOfType<CameraFollow>();
         playerCombat = GetComponentInParent<PlayerCombat>();
     }
 
@@ -17,6 +19,7 @@ public class PlayerAttackCollider : MonoBehaviour
         }
         if(other.tag == "LootCrate"){
             other.GetComponent<LootCrate>().GetDestroyed();
+            cam.LightShake();
         }
     }
 }

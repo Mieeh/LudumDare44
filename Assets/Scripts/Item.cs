@@ -22,17 +22,30 @@ public class Item : MonoBehaviour
     public int defense = 0;
 
     private SpriteRenderer spre;
+    private Collider2D col;
+    private Transform playerTransform;
 
     private void Awake() {
         spre = GetComponent<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
+        playerTransform = FindObjectOfType<PlayerMove>().transform;
     }
 
     private void Start() {
         StartCoroutine(ColliderCoroutine());
     }
+    
+    private void Update() {
+        if(col.isActiveAndEnabled){
+            float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+            if(distanceToPlayer < 2.0f){
+                transform.position = Vector3.Lerp(transform.position, playerTransform.position, 1.0f*Time.deltaTime);
+            }
+        }
+    }
 
     private IEnumerator ColliderCoroutine(){
         yield return new WaitForSeconds(1.0f);
-        GetComponent<Collider2D>().enabled = true;
+        col.enabled = true;
     }
 }

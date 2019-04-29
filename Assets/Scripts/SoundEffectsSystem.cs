@@ -25,6 +25,9 @@ public class SoundEffectsSystem : MonoBehaviour
             temp.GetComponent<AudioSource>().Play(delay);
             Destroy(temp, sfx_list[name].length);
         }
+        else{
+            print("TRYING TO PLAY A SOUND THAT DOESN'T EXIST!");
+        }
     }
 
     private static void LoadAllSFX(){

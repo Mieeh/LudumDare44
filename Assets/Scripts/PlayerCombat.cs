@@ -33,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackLengthInSeconds;
     [System.NonSerialized] 
     public bool attackInvincibility = false;
+    private CameraFollow cam;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +41,7 @@ public class PlayerCombat : MonoBehaviour
         playerInventory = GetComponent<PlayerInventory>();
         spre = GetComponent<SpriteRenderer>();
         animController = GetComponent<Animator>();
+        cam = FindObjectOfType<CameraFollow>(); // cam shake
 
         attackColliderPositions.Add(new Vector3(0, 0.56f));
         attackColliderPositions.Add(new Vector3(0.75f, -0.33f));
@@ -93,6 +95,9 @@ public class PlayerCombat : MonoBehaviour
 
         animController.SetTrigger("attack_trigger");
 
+        // SFX
+        SoundEffectsSystem.PlaySFX("player_attack");
+
         StopCoroutine("AttackCoroutine");
         StartCoroutine("AttackCoroutine");
     }
@@ -104,6 +109,10 @@ public class PlayerCombat : MonoBehaviour
 
          // Spawn blooderino
         FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
+        // Other effects
+        cam.LightShake();
+        SoundEffectsSystem.PlaySFX("player_damaged");
 
         int damage = ConvertToPlayerDamage(enemy.attack);
         HP-=damage;
@@ -121,6 +130,10 @@ public class PlayerCombat : MonoBehaviour
 
         // Spawn blooderino
         FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
+        // Other effects
+        cam.LightShake();
+        SoundEffectsSystem.PlaySFX("player_damaged");
 
         int damage = ConvertToPlayerDamage(howMuch);
         HP-=damage;
@@ -209,13 +222,13 @@ public class PlayerCombat : MonoBehaviour
         // Position the collider accordingly
         attackCollider.transform.localPosition = attackColliderPositions[(int)attackDirection];
         if(attackDirection == AttackDirection.RIGHT || attackDirection == AttackDirection.LEFT){
-            attackCollider.transform.localScale = new Vector3(0.55f,  0.78f, 1.0f);
+            attackCollider.transform.localScale = new Vector3(0.6f,  1.15f, 1.0f);
         }
         else if(attackDirection == AttackDirection.UP){
-            attackCollider.transform.localScale = new Vector3(0.7f, 0.65f, 1.0f);
+            attackCollider.transform.localScale = new Vector3(1.4f, 0.65f, 1.0f);
         }
         else if(attackDirection == AttackDirection.DOWN){
-            attackCollider.transform.localScale = new Vector3(0.7f, 0.545f);
+            attackCollider.transform.localScale = new Vector3(1.4f, 0.545f);
         }
         
         yield return new WaitForSeconds(attackLengthInSeconds);

@@ -63,8 +63,10 @@ public class Spider : EnemyBase
         StartCoroutine(GetKnockedBack(knockBack));
         
         // Did we die?
-        if(HP <= 0)
+        if(HP <= 0){
+            SoundEffectsSystem.PlaySFX("spider_death");
             Die();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -72,6 +74,8 @@ public class Spider : EnemyBase
         {
             other.gameObject.GetComponent<PlayerCombat>().GetAttacked(this);
             animator.SetTrigger("attack_trigger");
+            // SFX
+            SoundEffectsSystem.PlaySFX("spider_attack");
         }
     }
 

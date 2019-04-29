@@ -62,6 +62,10 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     protected IEnumerator GetKnockedBack(float knockBack){
+
+        // Enemy damaged SFX
+        SoundEffectsSystem.PlaySFX("enemy_damaged");
+
         knockedBack = true;
         rBody.velocity = Vector2.zero;
 

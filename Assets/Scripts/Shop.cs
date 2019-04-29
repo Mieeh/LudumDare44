@@ -15,7 +15,7 @@ public class Shop : MonoBehaviour
     public Image itemImage;
     public TMP_Text itemValue, itemDamage, itemDefense;
     public TMP_Text playerValueText;
-    public Image wantedItemImage;
+    public Image wantedItemImage, wantedItemImage2;
 
     private PlayerInventory playerInventory;
     private PlayerCombat playerCombat;
@@ -40,6 +40,9 @@ public class Shop : MonoBehaviour
                     desiredIndex--;
                 }
 
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_up");
+
                 UpdateCurrentItem();
             }
             if(Input.GetKeyDown(KeyCode.S)){
@@ -49,6 +52,9 @@ public class Shop : MonoBehaviour
                 else{
                     desiredIndex = 0;
                 }
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_down");
 
                 UpdateCurrentItem();
             }
@@ -105,10 +111,17 @@ public class Shop : MonoBehaviour
 
         // Transfer currency to the player
         if(currentBuyer.IsHappyWithItem(itemToSell.itemName)){
-            playerCombat.HP += itemToSell.value + currentBuyer.extraPay;
+            int extraPay = (int)((itemToSell.value * Buyer.payFactor) - itemToSell.value);
+            playerCombat.HP += itemToSell.value + extraPay;
+
+            //SFX
+            SoundEffectsSystem.PlaySFX("sold_expensive_item");
         }
         else{
             playerCombat.HP += itemToSell.value;
+
+            // SFX
+            SoundEffectsSystem.PlaySFX("sold_item");
         }
 
         // Remove the item!
@@ -152,8 +165,10 @@ public class Shop : MonoBehaviour
         // Is this something that the buyer wants?
         bool buyerWants = currentBuyer.IsHappyWithItem(_item.itemName);
 
+        int extraPay = (int)((_item.value * Buyer.payFactor) - _item.value);
+
         if(buyerWants){
-            itemValue.text = "<color=red>" + _item.value.ToString() + "</color> + <color=green>" + currentBuyer.extraPay.ToString() + "</color>";
+            itemValue.text = "<color=red>" + _item.value.ToString() + "</color> + <color=green>" +  extraPay + "</color>";
         }
         else{
             itemValue.text = "<color=red>" + _item.value.ToString();
@@ -166,9 +181,10 @@ public class Shop : MonoBehaviour
     private void SelectRandomBuyer(){
         int randIndex = Random.Range(0, allPossibleBuyers.Length);
         currentBuyer = allPossibleBuyers[randIndex];
-        
+
         // Update UI
         wantedItemImage.sprite = currentBuyer.wantedItem.GetComponent<SpriteRenderer>().sprite;
+        wantedItemImage2.sprite = currentBuyer.wantedItem2.GetComponent<SpriteRenderer>().sprite;
     }
 
 }

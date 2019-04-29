@@ -34,7 +34,6 @@ public class Ogre : EnemyBase
     }
 
     private void Update() {
-
         // Chase player or nah?
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
         if(distanceToPlayer < chaseRange){
@@ -108,12 +107,17 @@ public class Ogre : EnemyBase
         StartCoroutine(GetKnockedBack(knockBack*1000*0.5f));
 
         // Did we die?
-        if(HP <= 0)
+        if(HP <= 0){
+            SoundEffectsSystem.PlaySFX("ogre_death");
             Die();
+        }
     }
 
     private IEnumerator AttackCoroutine(){
         isAttacking = true;
+
+        // SFX
+        SoundEffectsSystem.PlaySFX("ogre_attack");
 
         // Check which direction we want to attack
         int bestIndex = 0;
