@@ -84,7 +84,6 @@ public class PlayerCombat : MonoBehaviour
         }
         else{
             animController.enabled = true;
-            
         }
     }
 
