@@ -40,6 +40,9 @@ public class Shop : MonoBehaviour
                     desiredIndex--;
                 }
 
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_up");
+
                 UpdateCurrentItem();
             }
             if(Input.GetKeyDown(KeyCode.S)){
@@ -49,6 +52,9 @@ public class Shop : MonoBehaviour
                 else{
                     desiredIndex = 0;
                 }
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_down");
 
                 UpdateCurrentItem();
             }
@@ -107,9 +113,15 @@ public class Shop : MonoBehaviour
         if(currentBuyer.IsHappyWithItem(itemToSell.itemName)){
             int extraPay = (int)((itemToSell.value * Buyer.payFactor) - itemToSell.value);
             playerCombat.HP += itemToSell.value + extraPay;
+
+            //SFX
+            SoundEffectsSystem.PlaySFX("sold_expensive_item");
         }
         else{
             playerCombat.HP += itemToSell.value;
+
+            // SFX
+            SoundEffectsSystem.PlaySFX("sold_item");
         }
 
         // Remove the item!

@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
             print("Max capacity reached!");
         }
     }
-
+    
     public void Equip(Item itemToEquip){
         if(itemToEquip.itemType == Item.ItemType.JUNK){
             print("You can't equip junk!");
@@ -43,12 +43,18 @@ public class PlayerInventory : MonoBehaviour
                 AddItem(currentWeapon);
             }
             currentWeapon = itemToEquip;
+
+            // SFX
+            SoundEffectsSystem.PlaySFX("sword_equip");
         }
         else{
             if(currentArmor != null){
                 AddItem(currentArmor);
             }
             currentArmor = itemToEquip;
+
+            // SFX
+            SoundEffectsSystem.PlaySFX("armor_equip");
         }
     }
 
@@ -61,6 +67,8 @@ public class PlayerInventory : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.GetComponent<Item>() != null){
             AddItem(other.GetComponent<Item>());
+
+            SoundEffectsSystem.PlaySFX("pickup_item");
         }
     }
 }

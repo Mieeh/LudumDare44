@@ -52,6 +52,9 @@ public class InventoryUI : MonoBehaviour
                     desiredIndex = 0;
                 
                 SelectInventory(desiredIndex);
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_up");
             }
             else if(Input.GetKeyDown(KeyCode.A)){
                 if(desiredIndex != 0)
@@ -60,18 +63,27 @@ public class InventoryUI : MonoBehaviour
                     desiredIndex = playerInventory.itemList.Count-1;
             
                 SelectInventory(desiredIndex);
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_up");
             }
             else if(Input.GetKeyDown(KeyCode.W)){
                 int newIndex = desiredIndex-4;
                 if(newIndex >= 0)
                     desiredIndex = newIndex;
                 SelectInventory(desiredIndex);
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_down");
             }
             else if(Input.GetKeyDown(KeyCode.S)){
                 int newIndex = desiredIndex+4;
-                if(newIndex < playerInventory.itemList.Count-1)
+                if(newIndex < playerInventory.itemList.Count)
                     desiredIndex = newIndex;
                 SelectInventory(desiredIndex);
+
+                // SFX
+                SoundEffectsSystem.PlaySFX("ui_scroll_down");
             }
 
             if(Input.GetKeyDown(KeyCode.Space)){

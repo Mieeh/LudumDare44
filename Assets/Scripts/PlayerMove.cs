@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     private float moveSpeed = 3.5f;
     private float sprintSpeed = 5f;
     private float invincibilityTimeInSeconds = 0.7f;
-    private float dodgeTimeInSeconds = 1.0f;
+    private float dodgeTimeInSeconds = 0.8f;
     float verticalInput, horizontalInput, verticalSpeed, horizontalSpeed, timeElapsed;
     private KeyCode dashDirection, potentialDashDirection;
     private ArrayList movementKeys;
@@ -17,7 +17,6 @@ public class PlayerMove : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
-        //Application.targetFrameRate = 60;
         isSprinting = false;
         isMoving = false;
 

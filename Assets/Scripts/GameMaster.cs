@@ -16,14 +16,21 @@ public class GameMaster : MonoBehaviour
     public GameObject playerUIGameObject;
     public GameObject SlashBloodPrefab, DeathBloodPrefab;
 
+    // Music themes
+    public AudioClip dungeon_theme, shop_theme;
+    private AudioSource audio_source;
+
     private Shop shopScript;
 
     public Image fadePanel;
+
+    private const float bgVolume = 0.5f;
 
     private void Awake() {
         playerGameObject = FindObjectOfType<PlayerMove>().gameObject;
         UIScriptsGameObject = FindObjectOfType<InventoryUI>().gameObject; // InventoryUI & Shop scripts
         shopScript = FindObjectOfType<Shop>();
+        audio_source = GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -33,11 +40,13 @@ public class GameMaster : MonoBehaviour
 
     public void GotoShop(){
         StopAllCoroutines();
+        StartCoroutine("ChangeToShopTheme");
         StartCoroutine("GotoShopCoroutine");
     }
 
     public void GotoDungeon(){
         StopAllCoroutines();
+        StartCoroutine("ChangeToDungeonTheme");
         StartCoroutine("GotoDungeonCoroutine");
     }
 
@@ -183,6 +192,43 @@ public class GameMaster : MonoBehaviour
     public void SpawnDeathBlood(Vector3 pos){
         GameObject temp = Instantiate(DeathBloodPrefab, pos, Quaternion.identity);
         Destroy(temp, 6);
+    }
+
+    IEnumerator ChangeToShopTheme(){
+        
+        const float fadeSpeed = 1.0f;
+        
+        while(audio_source.volume > 0){
+            audio_source.volume = Mathf.MoveTowards(audio_source.volume, 0, fadeSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        audio_source.Stop();
+        audio_source.clip = shop_theme;
+        audio_source.Play();
+
+        while(audio_source.volume < bgVolume){
+            audio_source.volume = Mathf.MoveTowards(audio_source.volume, 1, fadeSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator ChangeToDungeonTheme(){
+        const float fadeSpeed = 1.0f;
+        
+        while(audio_source.volume > 0){
+            audio_source.volume = Mathf.MoveTowards(audio_source.volume, 0, fadeSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        audio_source.Stop();
+        audio_source.clip = dungeon_theme;
+        audio_source.Play();
+
+        while(audio_source.volume < bgVolume){
+            audio_source.volume = Mathf.MoveTowards(audio_source.volume, 1, fadeSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
 }
