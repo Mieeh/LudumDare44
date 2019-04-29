@@ -156,8 +156,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 6627348859158593996, guid: 70cb7525dce43464f98912e55f20c926,
     type: 3}
   fireRateInSeconds: 1.67
-  projectileSpeed: 4
-  shootingRange: 4
+  projectileSpeed: 6
+  shootingRange: 6
 --- !u!95 &122173398
 Animator:
   serializedVersion: 3

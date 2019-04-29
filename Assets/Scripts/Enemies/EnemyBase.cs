@@ -103,13 +103,22 @@ public abstract class EnemyBase : MonoBehaviour
         if(dropEquipment == true){
             if(equipmentItems.Count != 0){
                 // Drop random equipment from the equpmentItems list
+                int randIndex = Random.Range(0, equipmentItems.Count);
+                GameObject item = Instantiate(equipmentItems[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+                item.transform.SetParent(transform.parent);
             }
             else{
                 // Drop random junk
+                int randIndex = Random.Range(0, junkItems.Count);
+                GameObject item = Instantiate(junkItems[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+                item.transform.SetParent(transform.parent);
             }
         }
         else if(dropJunk == true){
             // Drop junk
+            int randIndex = Random.Range(0, junkItems.Count);
+            GameObject item = Instantiate(junkItems[randIndex].gameObject, transform.position, Quaternion.identity) as GameObject;
+            item.transform.SetParent(transform.parent);
         } 
 
         // Disable, basically remove the enemy 

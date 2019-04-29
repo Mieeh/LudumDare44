@@ -66,7 +66,9 @@ public class PlayerUI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "Sign"){
+            signText.text = "";
             lastSignMessage = other.GetComponent<Sign>().message;
+            StopCoroutine("SignCoroutine");
             StartCoroutine("SignCoroutine");
             signGameObject.SetActive(true);
         }

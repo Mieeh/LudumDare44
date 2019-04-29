@@ -21,14 +21,10 @@ public class ProjectileEnemy : EnemyBase
     }
 
     private void Update() {
-
-        if(HP < 0)
-            StopAllCoroutines();
-
         {
             float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
             if(distanceToPlayer < shootingRange){
-                if(!isShooting){
+                if(!isShooting && HP > 0){
                     StartCoroutine("ShootAtPlayer");
                     isShooting = true;
                     animator.SetTrigger("attack_trigger");

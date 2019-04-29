@@ -157,7 +157,7 @@ MonoBehaviour:
     type: 3}
   fireRateInSeconds: 1.67
   projectileSpeed: 4
-  shootingRange: 4
+  shootingRange: 6
 --- !u!95 &122173398
 Animator:
   serializedVersion: 3

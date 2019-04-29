@@ -37,7 +37,8 @@ public class GameMaster : MonoBehaviour
 
     private void Start() {
         // Start the game by going to the dungeon
-        GotoDungeon();
+        StartCoroutine("ChangeToDungeonTheme");
+        StartCoroutine("StartGame");
     }
 
     public void GotoShop(){
@@ -54,6 +55,26 @@ public class GameMaster : MonoBehaviour
 
     public void WinGame(){
         StartCoroutine("WinCoroutine");
+    }
+
+    private IEnumerator StartGame(){
+
+        // Position the player & camera
+        playerGameObject.transform.position = new Vector3(0, 4, 0);
+        Camera.main.GetComponent<CameraFollow>().enabled = true;
+
+        // Enable player components
+        playerGameObject.GetComponent<PlayerMove>().enabled = true;
+        playerGameObject.GetComponent<PlayerCombat>().enabled = true;
+        playerGameObject.GetComponent<PlayerUI>().enabled = true;
+        UIScriptsGameObject.GetComponent<InventoryUI>().enabled = true;
+        playerGameObject.GetComponent<Animator>().enabled = true;
+        playerUIGameObject.SetActive(true);
+
+        while(fadePanel.color != Color.clear){
+            fadePanel.color = Vector4.MoveTowards(fadePanel.color, Color.clear, 1.5f*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     private IEnumerator WinCoroutine(){
