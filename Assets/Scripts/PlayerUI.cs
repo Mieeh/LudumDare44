@@ -15,6 +15,6 @@ public class PlayerUI : MonoBehaviour
     }
 
     private void Update() {
-        healthText.text = "Health: " + playerCombat.HP.ToString();
+        healthText.text = playerCombat.HP.ToString();
     }
 }

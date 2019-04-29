@@ -61,6 +61,9 @@ public class ProjectileEnemy : EnemyBase
     public override void TakeDamage(int howMuch, float knockBack){
         HP-=howMuch;
 
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
         StopCoroutine("GetKnockedBack");
         StartCoroutine(GetKnockedBack(knockBack));
 

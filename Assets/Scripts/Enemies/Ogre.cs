@@ -100,6 +100,9 @@ public class Ogre : EnemyBase
     public override void TakeDamage(int howMuch, float knockBack){
         HP-=howMuch;
 
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
         // knockback away from the player
         StopCoroutine("GetKnockedBack");
         StartCoroutine(GetKnockedBack(knockBack*1000*0.5f));

@@ -22,24 +22,29 @@ public class PlayerCombat : MonoBehaviour
     private PlayerMove playerMove;
     private PlayerInventory playerInventory;
     private SpriteRenderer spre;
+    private Animator animController;
     private List<Vector3> attackColliderPositions = new List<Vector3>();
     public float stunTimer = 1.0f;
+    
+    public Sprite[] idleSprites;
 
     private AttackDirection attackDirection;
     private bool isAttacking = false;
     public float attackLengthInSeconds;
-    private bool attackInvincibility = false;
+    [System.NonSerialized] 
+    public bool attackInvincibility = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         playerMove = GetComponent<PlayerMove>();
         playerInventory = GetComponent<PlayerInventory>();
         spre = GetComponent<SpriteRenderer>();
+        animController = GetComponent<Animator>();
 
-        attackColliderPositions.Add(new Vector3(0, 1));
-        attackColliderPositions.Add(new Vector3(1, 0));
-        attackColliderPositions.Add(new Vector3(0, -1));
-        attackColliderPositions.Add(new Vector3(-1, 0));
+        attackColliderPositions.Add(new Vector3(0, 0.56f));
+        attackColliderPositions.Add(new Vector3(0.75f, -0.33f));
+        attackColliderPositions.Add(new Vector3(0, -0.95f));
+        attackColliderPositions.Add(new Vector3(-0.75f, -0.33f));
     }
 
     void Update(){
@@ -51,26 +56,41 @@ public class PlayerCombat : MonoBehaviour
         // Check attack direction
         if(rb.velocity.x > 0){
             attackDirection = AttackDirection.RIGHT;
+            animController.SetFloat("attack_direction", 0);
         }
         else if(rb.velocity.x < 0){
             attackDirection = AttackDirection.LEFT;
+            animController.SetFloat("attack_direction", 1);
         }
         else if(rb.velocity.y > 0){
             attackDirection = AttackDirection.UP;
+            animController.SetFloat("attack_direction", 2);
         }
         else if(rb.velocity.y < 0){
             attackDirection = AttackDirection.DOWN;
+            animController.SetFloat("attack_direction", 3);
         }
-    }
 
-    public void Die() {
-        
+        // Walk direction
+        Vector2 velocityVector = rb.velocity.normalized;
+        animController.SetFloat("x", velocityVector.x);
+        animController.SetFloat("y", velocityVector.y);
+
+        if(velocityVector.x == 0 && velocityVector.y == 0 && !isAttacking){
+            animController.enabled = false;
+            spre.sprite = idleSprites[(int)attackDirection];
+        }
+        else{
+            animController.enabled = true;
+        }
     }
 
     private void Attack(){
         // If we're already attacking, STOP and return 
         if(isAttacking || playerMove.isDodging || attackInvincibility)
             return;
+
+        animController.SetTrigger("attack_trigger");
 
         StopCoroutine("AttackCoroutine");
         StartCoroutine("AttackCoroutine");
@@ -81,10 +101,13 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
         int damage = ConvertToPlayerDamage(enemy.attack);
         HP-=damage;
         if(HP <= 0){
-            print("DIEDIEDIEDIEDIEDIE");
+            FindObjectOfType<GameMaster>().GameOver();
         }
 
         StartCoroutine(AttackedCoroutine(enemy.transform.position));
@@ -95,10 +118,13 @@ public class PlayerCombat : MonoBehaviour
             return;
         }
 
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
         int damage = ConvertToPlayerDamage(howMuch);
         HP-=damage;
         if(HP <= 0){
-            print("DIEDIEDIEDIEDIE");
+            FindObjectOfType<GameMaster>().GameOver();
         }
 
         StartCoroutine(AttackedCoroutine(position));
@@ -172,16 +198,29 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator AttackCoroutine(){
         isAttacking = true;
-        // Enable the collider
-        attackCollider.enabled = true;
-        // Position the collider accordingly
-        attackCollider.transform.localPosition = attackColliderPositions[(int)attackDirection];
 
         // Disable movement
         playerMove.enabled = false;
         rb.velocity = Vector2.zero;
+
+        // Wind up time
+        yield return new WaitForSeconds(0.3f);
+
+        // Enable the collider
+        attackCollider.enabled = true;
+        // Position the collider accordingly
+        attackCollider.transform.localPosition = attackColliderPositions[(int)attackDirection];
+        if(attackDirection == AttackDirection.RIGHT || attackDirection == AttackDirection.LEFT){
+            attackCollider.transform.localScale = new Vector3(0.55f,  0.78f, 1.0f);
+        }
+        else if(attackDirection == AttackDirection.UP){
+            attackCollider.transform.localScale = new Vector3(0.7f, 0.65f, 1.0f);
+        }
+        else if(attackDirection == AttackDirection.DOWN){
+            attackCollider.transform.localScale = new Vector3(0.7f, 0.545f);
+        }
         
-        yield return new WaitForSeconds(attackLengthInSeconds);
+        yield return new WaitForSeconds(attackLengthInSeconds-0.3f);
         
         // Enable movement
         playerMove.enabled = true;

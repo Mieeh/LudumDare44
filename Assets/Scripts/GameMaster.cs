@@ -14,6 +14,7 @@ public class GameMaster : MonoBehaviour
     public GameObject shopGameObject;
     private GameObject UIScriptsGameObject;
     public GameObject playerUIGameObject;
+    public GameObject SlashBloodPrefab, DeathBloodPrefab;
 
     private Shop shopScript;
 
@@ -135,4 +136,50 @@ public class GameMaster : MonoBehaviour
             enemy.ResetMe();
         }
     }
+
+    public void GameOver() {
+        // Disable everything neccesary, fade out, load title screen scene
+        StartCoroutine("GameOverCoroutine");
+    }
+
+    private IEnumerator GameOverCoroutine(){
+
+        
+        playerGameObject.GetComponent<Collider2D>().enabled = false;
+        
+        Destroy(playerGameObject.GetComponent<PlayerMove>());
+        Destroy(playerGameObject.GetComponent<PlayerCombat>());
+        playerGameObject.GetComponent<Rigidbody2D>().simulated = false;
+
+        // Fade out the player
+        SpriteRenderer playerSpre = playerGameObject.GetComponent<SpriteRenderer>();
+        const float playerFadeSpeed = 0.3f;
+        const float playerFloatSpeed = 0.6f;
+        while(playerSpre.color != Color.clear){
+            playerGameObject.transform.Translate(Vector3.up*playerFloatSpeed*Time.deltaTime);
+            playerSpre.color = Vector4.MoveTowards(playerSpre.color, Color.clear, playerFadeSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        // Fade panel
+        const float darkenSpeed = 0.6f;
+        while(fadePanel.color != Color.black){
+            fadePanel.color = Vector4.MoveTowards(fadePanel.color, Color.black, darkenSpeed*Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+
+        // See ya!
+        SceneManager.LoadScene("title_screen");
+    }
+
+    public void SpawnSlashBlood(Vector3 pos){
+        GameObject temp = Instantiate(SlashBloodPrefab, pos, Quaternion.identity);
+        Destroy(temp, 3);
+    }
+
+    public void SpawnDeathBlood(Vector3 pos){
+        GameObject temp = Instantiate(DeathBloodPrefab, pos, Quaternion.identity);
+        Destroy(temp, 6);
+    }
+
 }

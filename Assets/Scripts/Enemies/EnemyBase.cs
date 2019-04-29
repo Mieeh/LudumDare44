@@ -78,6 +78,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void Die(){
 
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnDeathBlood(transform.position);
+
         // Spawn item?
         if(itemPool.Count > 0) {
             float rand = Random.Range(0.0f, 1.0f);

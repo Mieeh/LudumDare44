@@ -55,6 +55,9 @@ public class Spider : EnemyBase
     public override void TakeDamage(int howMuch, float knockBack){
         HP-=howMuch;
     
+        // Spawn blooderino
+        FindObjectOfType<GameMaster>().SpawnSlashBlood(transform.position);
+
         // Knockback away from the player
         StopCoroutine("GetKnockedBack");
         StartCoroutine(GetKnockedBack(knockBack));
