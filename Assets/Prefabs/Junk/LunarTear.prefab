@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Lunar Tear
-  flavourText: '*insert flavor text*'
+  flavourText: A flower said to grant any wish. Sounds like the type of mumbo jumbo
+    that would increase the market price.
   itemType: 2
   value: 5000
   damage: 0

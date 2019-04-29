@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Wolf Emblem
-  flavourText: '*insert flavor text*'
+  flavourText: A medallion of some sort. It seems like it emits random bursts of vibration.
   itemType: 2
   value: 500
   damage: 0

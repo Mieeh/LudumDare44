@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Reaper's Scythe
-  flavourText: '*insert flavor text*'
+  flavourText: If I keep this forever, won't Death be powerless against me?
   itemType: 0
   value: 5000
   damage: 30

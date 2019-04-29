@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: The One True Ring
-  flavourText: '*insert flavor text*'
+  flavourText: A ring most precious to all. I should sell this immediately.
   itemType: 2
   value: 75000
   damage: 0

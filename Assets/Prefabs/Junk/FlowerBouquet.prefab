@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Flower Bouquet
-  flavourText: '*insert flavor textt*'
+  flavourText: "These would look nice on my grave if I don\u2019t make it out."
   itemType: 2
   value: 50
   damage: 0

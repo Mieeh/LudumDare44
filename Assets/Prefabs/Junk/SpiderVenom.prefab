@@ -120,7 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Spider Venom
-  flavourText: '*insert flavor text*'
+  flavourText: I hate spiders, and for good reason. This amount of venom could probably
+    kill a person within minutes.
   itemType: 2
   value: 100
   damage: 0

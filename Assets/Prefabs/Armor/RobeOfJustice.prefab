@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Robe of Justice
-  flavourText: '*insert flavor text*'
+  flavourText: 
   itemType: 1
   value: 1000
   damage: 0

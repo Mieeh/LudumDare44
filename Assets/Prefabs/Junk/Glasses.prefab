@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2798918312073858525}
   - component: {fileID: 4620749435037025879}
   m_Layer: 0
-  m_Name: Glases
+  m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

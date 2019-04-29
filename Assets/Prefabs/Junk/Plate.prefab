@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Plate
-  flavourText: '*insert flavor text*'
+  flavourText: A regular plate. I heard porcelain is in now?
   itemType: 2
   value: 250
   damage: 0

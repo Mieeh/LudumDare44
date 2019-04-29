@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Green Tunic
-  flavourText: '*insert flavor text*'
+  flavourText: I prefer purple.
   itemType: 1
   value: 750
   damage: 0
