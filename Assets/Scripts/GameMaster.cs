@@ -59,6 +59,7 @@ public class GameMaster : MonoBehaviour
         playerGameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         playerGameObject.GetComponent<PlayerMove>().enabled = false;
         playerGameObject.GetComponent<PlayerCombat>().enabled = false;
+        playerGameObject.GetComponent<PlayerUI>().enabled = false;
         playerGameObject.GetComponent<Animator>().enabled = false;
         playerGameObject.GetComponent<SpriteRenderer>().sprite = playerGameObject.GetComponent<PlayerCombat>().idleSprites[(int)PlayerCombat.AttackDirection.UP];
         UIScriptsGameObject.GetComponent<InventoryUI>().enabled = false;
@@ -127,6 +128,7 @@ public class GameMaster : MonoBehaviour
         // Enable player components
         playerGameObject.GetComponent<PlayerMove>().enabled = true;
         playerGameObject.GetComponent<PlayerCombat>().enabled = true;
+        playerGameObject.GetComponent<PlayerUI>().enabled = true;
         UIScriptsGameObject.GetComponent<InventoryUI>().enabled = true;
         playerGameObject.GetComponent<Animator>().enabled = true;
         playerUIGameObject.SetActive(true);

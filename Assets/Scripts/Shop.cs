@@ -52,20 +52,20 @@ public class Shop : MonoBehaviour
                 else{
                     desiredIndex = 0;
                 }
-
+                
                 // SFX
                 SoundEffectsSystem.PlaySFX("ui_scroll_down");
 
                 UpdateCurrentItem();
             }
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetKeyDown(InputKeys.INTERACT)){
                 SellCurrentItem();
             }
 
         }
         playerValueText.text = playerCombat.HP.ToString();
 
-        if(Input.GetKeyDown(KeyCode.X)){
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY)){
             FindObjectOfType<GameMaster>().GotoDungeon();
         }
 

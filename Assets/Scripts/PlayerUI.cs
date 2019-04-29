@@ -10,8 +10,15 @@ public class PlayerUI : MonoBehaviour
     public TMP_Text signText;
     private string lastSignMessage;
     public GameObject signGameObject;
+    [Header("Rope UI")]
+    public GameObject ropeGiverGameObject;
+    public TMP_Text ropeUseText;
+    public Image ropeImage;
+    public GameObject ropeGiverWorldObject;
 
     private PlayerCombat playerCombat;
+
+    private bool hasRope = false;
 
     private void Awake() {
         playerCombat = GetComponent<PlayerCombat>();
@@ -19,6 +26,33 @@ public class PlayerUI : MonoBehaviour
 
     private void Update() {
         healthText.text = playerCombat.HP.ToString();
+
+        // Use rope
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope){
+            hasRope = false;
+            ropeUseText.gameObject.SetActive(false);
+            ropeImage.gameObject.SetActive(false);
+            ropeGiverGameObject.SetActive(false);
+            FindObjectOfType<GameMaster>().GotoShop();
+        }
+
+        // Rope acceptapance
+        if(Input.GetKeyDown(InputKeys.INTERACT) && ropeGiverGameObject.activeInHierarchy){
+            // Give rope to player
+            // Remove 10% of life
+            playerCombat.HP = (int)((playerCombat.HP * 0.9f)+0.5f);
+            hasRope = true;
+            ropeUseText.gameObject.SetActive(true);
+            ropeImage.gameObject.SetActive(true);
+            ropeGiverGameObject.SetActive(false);
+        }
+
+        if(hasRope){
+            ropeGiverWorldObject.GetComponent<Collider2D>().enabled = (false);
+        }
+        else{
+            ropeGiverWorldObject.GetComponent<Collider2D>().enabled = (true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -27,6 +61,9 @@ public class PlayerUI : MonoBehaviour
             StartCoroutine("SignCoroutine");
             signGameObject.SetActive(true);
         }
+        if(other.tag == "RopeGiver"){
+            ropeGiverGameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -34,6 +71,9 @@ public class PlayerUI : MonoBehaviour
             StopCoroutine("SignCoroutine");
             signGameObject.SetActive(false);
             signText.text = "";
+        }
+        if(other.tag == "RopeGiver"){
+            ropeGiverGameObject.SetActive(false);
         }
     }
 

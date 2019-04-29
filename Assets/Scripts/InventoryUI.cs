@@ -86,7 +86,7 @@ public class InventoryUI : MonoBehaviour
                 SoundEffectsSystem.PlaySFX("ui_scroll_down");
             }
 
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(Input.GetKeyDown(InputKeys.INTERACT)){
                 ClickedEquip();
             }
         }

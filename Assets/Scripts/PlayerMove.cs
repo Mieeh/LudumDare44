@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
         isMoving = false;
         
 
-        if (Input.GetKeyDown(KeyCode.K) && !isDodging) {
+        if (Input.GetKeyDown(InputKeys.DODGE_KEY) && !isDodging) {
             if (horizontalInput != 0 || verticalInput != 0) {
                 dodgeDirection.x = Mathf.Lerp(0, horizontalInput, 0.9f);
                 dodgeDirection.y = Mathf.Lerp(0, verticalInput, 0.9f);

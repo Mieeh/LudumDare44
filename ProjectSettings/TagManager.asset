@@ -10,6 +10,8 @@ TagManager:
   - LootCrate
   - OgreAttackCollider
   - Sign
+  - RopeGiver
+  - Toll
   layers:
   - Default
   - TransparentFX
