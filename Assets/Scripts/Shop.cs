@@ -15,10 +15,14 @@ public class Shop : MonoBehaviour
     public Image itemImage;
     public TMP_Text itemValue, itemDamage, itemDefense;
     public TMP_Text playerValueText;
+    public Image wantedItemImage;
 
     private PlayerInventory playerInventory;
     private PlayerCombat playerCombat;
     private int desiredIndex = 0;
+
+    public Buyer[] allPossibleBuyers;
+    private Buyer currentBuyer;
 
     private void Awake() {
         playerInventory = FindObjectOfType<PlayerInventory>();
@@ -58,9 +62,24 @@ public class Shop : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.X)){
             FindObjectOfType<GameMaster>().GotoDungeon();
         }
+
+        for(int i = 0; i < allPossibleBuyers.Length; i++){
+            Color c = allPossibleBuyers[i].GetComponent<SpriteRenderer>().color;
+
+            if(currentBuyer == allPossibleBuyers[i]){
+                currentBuyer.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+            else{
+                allPossibleBuyers[i].GetComponent<SpriteRenderer>().color = Color.clear;
+            }
+        }
     }
 
     public void StartShop(){
+
+        // Select random buyer
+        SelectRandomBuyer();
+
         shopHolderObject.SetActive(true);
 
         if(playerInventory.itemList.Count != 0){
@@ -85,13 +104,21 @@ public class Shop : MonoBehaviour
         Item itemToSell = playerInventory.itemList[desiredIndex];
 
         // Transfer currency to the player
-        playerCombat.HP += itemToSell.value;
+        if(currentBuyer.IsHappyWithItem(itemToSell.itemName)){
+            playerCombat.HP += itemToSell.value + currentBuyer.extraPay;
+        }
+        else{
+            playerCombat.HP += itemToSell.value;
+        }
 
         // Remove the item!
         playerInventory.itemList.Remove(itemToSell);
         Destroy(itemToSell.gameObject);
 
         desiredIndex = 0;
+
+        // New buyer
+        SelectRandomBuyer();
 
         // Update UI
         UpdateCurrentItem();
@@ -122,10 +149,26 @@ public class Shop : MonoBehaviour
         itemImage.sprite = _item.GetComponent<SpriteRenderer>().sprite;
         itemImage.color = Color.white;
 
-        itemValue.text = _item.value.ToString();
+        // Is this something that the buyer wants?
+        bool buyerWants = currentBuyer.IsHappyWithItem(_item.itemName);
+
+        if(buyerWants){
+            itemValue.text = "<color=red>" + _item.value.ToString() + "</color> + <color=green>" + currentBuyer.extraPay.ToString() + "</color>";
+        }
+        else{
+            itemValue.text = "<color=red>" + _item.value.ToString();
+        }
         itemDamage.text = _item.damage.ToString();
         itemDefense.text = _item.defense.ToString();
         
+    }
+
+    private void SelectRandomBuyer(){
+        int randIndex = Random.Range(0, allPossibleBuyers.Length);
+        currentBuyer = allPossibleBuyers[randIndex];
+        
+        // Update UI
+        wantedItemImage.sprite = currentBuyer.wantedItem.GetComponent<SpriteRenderer>().sprite;
     }
 
 }

@@ -204,9 +204,6 @@ public class PlayerCombat : MonoBehaviour
         playerMove.enabled = false;
         rb.velocity = Vector2.zero;
 
-        // Wind up time
-        yield return new WaitForSeconds(0.3f);
-
         // Enable the collider
         attackCollider.enabled = true;
         // Position the collider accordingly
@@ -221,7 +218,7 @@ public class PlayerCombat : MonoBehaviour
             attackCollider.transform.localScale = new Vector3(0.7f, 0.545f);
         }
         
-        yield return new WaitForSeconds(attackLengthInSeconds-0.3f);
+        yield return new WaitForSeconds(attackLengthInSeconds);
         
         // Enable movement
         playerMove.enabled = true;

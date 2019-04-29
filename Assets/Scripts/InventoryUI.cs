@@ -90,7 +90,7 @@ public class InventoryUI : MonoBehaviour
     private void UpdatePlayerWindow(){
         // Weapon
         if(playerInventory.currentWeapon != null){
-            playerWeaponName.text = "Weapon: " + playerInventory.currentWeapon.itemName;
+            playerWeaponName.text = "Weapon: <color=green>" + playerInventory.currentWeapon.itemName + "</color>";
             playerWeaponImage.sprite = playerInventory.currentWeapon.GetComponent<SpriteRenderer>().sprite;
             playerWeaponImage.color = Color.white;
 
@@ -108,7 +108,7 @@ public class InventoryUI : MonoBehaviour
 
         // Armor
         if(playerInventory.currentArmor != null){
-            playerArmorName.text = "Armor " + playerInventory.currentArmor.itemName;
+            playerArmorName.text = "Armor <color=green>" + playerInventory.currentArmor.itemName + "</color>";
             // Image
             playerArmorImage.sprite = playerInventory.currentArmor.GetComponent<SpriteRenderer>().sprite;
             playerArmorImage.color = Color.white;
