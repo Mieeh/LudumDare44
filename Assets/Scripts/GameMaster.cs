@@ -153,6 +153,9 @@ public class GameMaster : MonoBehaviour
 
     public void GameOver() {
         // Disable everything neccesary, fade out, load title screen scene
+        // SFX
+        audio_source.Stop();
+        SoundEffectsSystem.PlaySFX("game_over");
         StartCoroutine("GameOverCoroutine");
     }
 
