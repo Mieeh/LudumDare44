@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     [Header("Rope UI")]
     public GameObject ropeGiverGameObject;
     public TMP_Text ropeUseText;
+    public TMP_Text ropeOutBlockText;
     public Image ropeImage;
     public GameObject ropeGiverWorldObject;
     public GameObject RelicUIGameObject;
@@ -30,13 +31,17 @@ public class PlayerUI : MonoBehaviour
         healthText.text = playerCombat.HP.ToString();
 
         // Use rope
-        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope && playerCombat.canEscape && playerCombat.HP > 0 && !InventoryUIObject.activeInHierarchy){
-            print("Used Escape Rope");
-            hasRope = false;
-            ropeUseText.gameObject.SetActive(false);
-            ropeImage.gameObject.SetActive(false);
-            ropeGiverGameObject.SetActive(false);
-            FindObjectOfType<GameMaster>().GotoShop();
+        if(Input.GetKeyDown(InputKeys.ESCAPE_KEY) && hasRope ){
+            if(playerCombat.canEscape && playerCombat.HP > 0 && !InventoryUIObject.activeInHierarchy){
+                hasRope = false;
+                ropeUseText.gameObject.SetActive(false);
+                ropeImage.gameObject.SetActive(false);
+                ropeGiverGameObject.SetActive(false);
+                FindObjectOfType<GameMaster>().GotoShop();
+            }
+            else{
+                ropeOutBlockText.color = Color.white;
+            }
         }
 
         // Rope acceptapance
@@ -63,6 +68,11 @@ public class PlayerUI : MonoBehaviour
                 RelicUIGameObject.SetActive(false);
                 FindObjectOfType<GameMaster>().WinGame();
             }
+        }
+
+        // Fade out the "cant rope out right now text" constantly
+        if(ropeOutBlockText.color != Color.clear){
+            ropeOutBlockText.color = Color.Lerp(ropeOutBlockText.color, Color.clear, 1.0f*Time.deltaTime);
         }
     }
 
